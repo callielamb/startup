@@ -1,0 +1,1 @@
+I had never known about or used github before. So, in this assignment I learned a lot! It's cool how github can talk to VS code and vice versa.
