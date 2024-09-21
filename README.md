@@ -1,7 +1,7 @@
-# Echo Draw
+# In A Blink
 
 ## Elevator Pitch
-**Echo Draw** is a fast-paced, multiplayer drawing game that tests both creativity and memory. Imagine catching a quick glimpse of an image, and then racing against the clock to recreate it from memory—competing with friends or other players online. After the drawing phase, everyone votes on the most accurate or creative rendition. It’s fun, competitive, and endlessly replayable, with randomized images keeping each round fresh. Echo Draw combines real-time interaction and playful competition, making it the perfect game for casual gamers and drawing enthusiasts alike!
+**In A Blink** is a fast-paced, multiplayer drawing game that tests both creativity and memory. Imagine catching a quick glimpse of an image, and then racing against the clock to recreate it from memory—competing with friends or other players online. After the drawing phase, everyone votes on the most accurate or creative rendition. It’s fun, competitive, and endlessly replayable, with randomized images keeping each round fresh. "In A Blink" combines real-time interaction and playful competition, making it the perfect game for casual gamers and drawing enthusiasts alike!
 
 ## Key Features
 - **Multiplayer Drawing Game**: Compete with 3 or more players in each game.
@@ -29,7 +29,7 @@
 - **Usage**: WebSockets ensure real-time synchronization between all players. The image is displayed to all players at the same time, and drawing submissions are broadcast instantly. WebSockets also manage real-time voting and leaderboard updates during and after each game round.
 
 ### Web Service (API)
-- **Calling Web Services**: Echo Draw fetches images for each round using the **Unsplash API** or **Lorem Picsum** to ensure a fresh set of visuals for players to recreate.
+- **Calling Web Services**: "In A Blink" fetches images for each round using the **Unsplash API** or **Lorem Picsum** to ensure a fresh set of visuals for players to recreate.
   - Example: The server makes a request to the Unsplash API for a random image, which is then displayed to all players for a limited time.
   
 - **Providing Web Services**: A custom API is used to save drawings, track player scores, and manage user profiles. Data from the game (like drawing submissions and voting results) is sent to and stored in a backend database.
@@ -49,7 +49,7 @@
   - Broadcast voting results and update the leaderboard in real time.
 
 ## Sketches of Application
-Below are rough sketches of the **Echo Draw** application, showing the game flow:
+Below are rough sketches of the **"In A Blink"** application, showing the game flow:
 
 ### Main Game Interface
 ![HomePage sketch](./homepage.jpg)
