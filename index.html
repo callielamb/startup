@@ -1,0 +1,55 @@
+<html lang="en"></html>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink HTML</title>
+        <!--<link rel="icon" href="favicon.ico" /> -->
+    </head>
+    <body>
+        <header>
+            <h1>In A Blink</h1>
+            <nav>
+              <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="game.html">Play</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="about.html">About</a></li>
+              </menu>
+            </nav>
+
+            <hr />
+        </header>
+
+        <main>
+            <h2>Welcome to In A Blink!</h2>
+            <p>Compete with your friends to recreate images from memory. You get just a few seconds to see the image, then it's up to you to draw it!</p>
+            
+            <!-- Login -->
+            <section id="login">
+                <h3>Log In to Play</h3>
+                <form method="get" action="game.html">
+                    <div>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
+                    </div>
+                    <button type="submit">Login</button>
+                    <button type="submit">Create</button>
+                </form>
+            </section>
+            <!--To display on the home page-->
+            <p>Ready to start? <a href="game.html">Join a game!</a></p>
+        </main>
+
+        <footer>
+            <hr />
+            <span class="text-reset">Author:</span>
+            <br />
+            <a href="https://github.com/callielamb/startup.git">GitHub</a>
+        </footer>
+    </body>
+</html>
