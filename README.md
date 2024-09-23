@@ -62,3 +62,14 @@ Below are rough sketches of the **"In A Blink"** application, showing the game f
 ![Voting Phase Sketch](./drawing.jpg)
 *After all players submit their drawings, everyone votes on the most accurate or creative recreation.*
 
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+## HTML deliverable
+For this deliverable I built out the structure of my application using HTML.
+
+- [x] **HTML pages** - Four HTML pages: homepage(login and gallery), Leaderboard, Play (host and join servers to play), and About (gives a showrt summary of the game).
+- [x] **Links** - The login/home page is linked to all other pages. The Play page is going to have links to a drawing page, and voting page. (these pages will later show up after starting a game)
+- [x] **Text** - Placeholder text is used to explain how the game works and guide users through the game’s features, such as hosting or joining a game, and viewing player scores.
+- [x] **Images** - Currently, the game page contains placeholders for images, which will eventually pull from a third-party image service. 
+- [x] **Login** - Input box and submit button for login(username). In the future, player data, like scores and past drawings, will be pulled from the database.
+- [x] **WebSocket** - Placeholders exist on the game page for WebSocket data, which will be used to sync real-time drawing actions and game updates between players.
