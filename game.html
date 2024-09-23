@@ -24,13 +24,6 @@
         <main>
             <h2>Game Lobby</h2>
             
-            <!-- Hosting a game -->
-            <section id="host-game">
-                <h3>Host a Game</h3>
-                <button>Host a New Game</button>
-                <p>[Host Game Placeholder]</p>
-            </section>
-        
             <!-- Joining a game -->
             <section id="join-game">
                 <h3>Join a Game</h3>
@@ -39,6 +32,40 @@
                     <li>[Available Game Placeholder 1]</li>
                     <li>[Available Game Placeholder 2]</li>
                 </ul>
+            </section>
+
+            <!-- Hosting a game -->
+            <section id="host-game">
+                <h3>Host a Game</h3>
+                <!--Server name, players 3+, public lobby or private?, keyword-->
+                <ul>
+                    <li>
+                      <label for="server-name">Server Name: </label>
+                      <input type="text" id="server-name" name="server-name" placeholder="server name here" required pattern="[Aa].*" />
+                    </li>
+                    <li>
+                        <select id="host-status" name="host-status">
+                          <option selected>public</option>
+                          <option>private</option>
+                        </select>
+                    </li>
+                    <!--If they select private, then a new box will appear prompting for a password-->
+                    <li>
+                        <label for="privserverkey">Server Password: </label>
+                        <input type="text" id="privserverkey" name="privserverkey" placeholder="password here" required pattern="[Aa].*" />
+                    </li>
+                    <li>
+                        <label for="player-number">Number of Players: </label>
+                        <select id="player-number" name="player-number">
+                          <option selected>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                        </select>
+                    </li>
+                </ul>
+                <button>Create Game</button>
+                <p>[Host Game Placeholder]</p>
             </section>
         
             <!-- Placeholder for game start -->
