@@ -1,0 +1,83 @@
+<html lang="en"></html>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink HTML</title>
+        <!--<link rel="icon" href="favicon.ico" /> -->
+    </head>
+    <body>
+        <header>
+            <h1>In A Blink</h1>
+            <nav>
+              <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="game.html">Play</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="about.html">About</a></li>
+              </menu>
+            </nav>
+
+            <hr />
+        </header>
+
+        <main>
+            <h2>Game Lobby</h2>
+            
+            <!-- Hosting a game -->
+            <section id="host-game">
+                <h3>Host a Game</h3>
+                <button>Host a New Game</button>
+                <p>[Host Game Placeholder]</p>
+            </section>
+        
+            <!-- Joining a game -->
+            <section id="join-game">
+                <h3>Join a Game</h3>
+                <p>Select from the available games below:</p>
+                <ul id="available-games">
+                    <li>[Available Game Placeholder 1]</li>
+                    <li>[Available Game Placeholder 2]</li>
+                </ul>
+            </section>
+        
+            <!-- Placeholder for game start -->
+            <section id="game-start">
+                <h3>Game Starting Soon...</h3>
+                <p>[Waiting for players to join.]</p>
+                <button>Start Game</button>
+            </section>
+        
+            <!-- Once the game starts -->
+            <div id="game-phase">
+                <h2>Get ready to draw in a blink!</h2>
+        
+                <!-- Placeholder for image from 3rd-party API -->
+                <div id="image-container">
+                    <p>[Image Placeholder]</p>
+                </div>
+        
+                <!-- Placeholder for drawing canvas -->
+                <div id="canvas-container">
+                    <p>[Drawing Canvas Placeholder]</p>
+                </div>
+        
+                <!-- Placeholder for WebSocket data -->
+                <div id="websocket-data">
+                    <p>[Real-time Game Data Placeholder]</p>
+                </div>
+                
+                <!--display during the whole game until the voting time-->
+                <p>Once the drawing is done, you'll vote on your favorite recreation!</p>
+            </div>
+        </main>
+        
+
+        <footer>
+            <hr />
+            <span class="text-reset">Author:</span>
+            <br />
+            <a href="https://github.com/callielamb/startup.git">GitHub</a>
+        </footer>
+    </body>
+</html>
