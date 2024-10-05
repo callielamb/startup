@@ -1,0 +1,79 @@
+<html lang="en"></html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink HTML</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="Home-Style.css" />
+        <link rel="stylesheet" href="firstpage-style.css" />
+
+        <!-- Include bootstrap CSS framework -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="container-fluid d-flex justify-content-between">
+                    <!-- Brand Logo (Title) -->
+                    <a class="navbar-brand" href="firstpage.html">
+                        <h1 class="h3">In A Blink</h1>
+                    </a>
+                    
+                    <!-- Navigation Links (Simple and visible at all times) -->
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="firstpage.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="game.html">Play</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item"></li>
+                            <a class="nav-link" href="index.html">Login/Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Background container -->
+        <div class="background-container"></div>
+        <main>
+            <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+                <div class="main-content card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+                    <h2 class="text-center">Welcome to In A Blink!</h2>
+                    <p class="text-center">Compete with your friends to recreate images from memory. You get just a few seconds to see the image, then it's up to you to draw it!</p>
+                    
+                    <!--Login Section-->
+                    <section id="login">
+                        <h3 class="text-center">Login to Play</h3>
+                        <form method="get" action="firstpage.html">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-secondary">Create</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

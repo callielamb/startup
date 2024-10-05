@@ -1,0 +1,112 @@
+<html lang="en"></html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink HTML</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="firstpage-style.css" />
+        <link rel="stylesheet" href="Game-Style.css" />
+
+        <!-- Include bootstrap CSS framework -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>In A Blink</h1>
+            <nav>
+              <menu>
+                <li><a href="firstpage.html">Home</a></li>
+                <li><a href="game.html">Play</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="about.html">About</a></li>
+              </menu>
+            </nav>
+
+            <hr />
+        </header>
+
+        <main>
+            <h2>Game Lobby</h2>
+            
+            <!-- Joining a game -->
+            <section id="join-game">
+                <h3>Join a Game</h3>
+                <p>Select from the available games below:</p>
+                <ul id="available-games">
+                    <li>[Available Game Placeholder 1]</li>
+                    <li>[Available Game Placeholder 2]</li>
+                </ul>
+            </section>
+
+            <!-- Hosting a game -->
+            <section id="host-game">
+                <h3>Host a Game</h3>
+                <!--Server name, players 3+, public lobby or private?, keyword-->
+                <ul>
+                    <li>
+                      <label for="server-name">Server Name: </label>
+                      <input type="text" id="server-name" name="server-name" placeholder="server name here" required pattern="[Aa].*" />
+                    </li>
+                    <li>
+                        <select id="host-status" name="host-status">
+                          <option selected>public</option>
+                          <option>private</option>
+                        </select>
+                    </li>
+                    <!--If they select private, then a new box will appear prompting for a password-->
+                    <li>
+                        <label for="privserverkey">Server Password: </label>
+                        <input type="text" id="privserverkey" name="privserverkey" placeholder="password here" required pattern="[Aa].*" />
+                    </li>
+                    <li>
+                        <label for="player-number">Number of Players: </label>
+                        <select id="player-number" name="player-number">
+                          <option selected>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                        </select>
+                    </li>
+                </ul>
+                <button>Create Game</button>
+                <p>[Host Game Placeholder]</p>
+            </section>
+            <hr />
+            <!-- Placeholder for game start -->
+            <section id="game-start">
+                <h3>Game Starting Soon...</h3>
+                <p>[Waiting for players to join.]</p>
+                <button>Start Game</button>
+            </section>
+            <hr />
+            <!-- Once the game starts -->
+            <div id="game-phase">
+                <h2>Get ready to draw in a blink!</h2>
+
+                <!-- Game actions section, initially hidden -->
+                <section id="game-actions">
+                    <h3>Game Started!</h3>
+                    <p>Navigate to the drawing or voting page:</p>
+                    <ul>
+                        <li><a href="drawing.html">Go to Drawing Page</a></li>
+                        <li><a href="voting.html">Go to Voting Page</a></li>
+                    </ul>
+                </section>
+            </div>
+            <a href="index.html"></a>
+                <button>Logout</button>
+            </a>
+        </main>
+        
+
+        <footer>
+            <hr />
+            <p>Callie Lambourne's <a href="https://github.com/callielamb/startup.git">GitHub</a></p>
+        </footer>
+    </body>
+</html>

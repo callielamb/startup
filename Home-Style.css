@@ -1,0 +1,70 @@
+/* Fullscreen background */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background1.png'); /* Background image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px); /* Apply the blur only to the background */
+    z-index: -1; /* Ensure background stays behind the content */
+}
+
+/* Main content container (card) */
+.main-content {
+    position: relative; /* Keep content on top of the background */
+    min-width: 300px; /* Prevent the card from shrinking too much */
+    margin: 120px auto; /* Center the card and add space from the top to account for the navbar */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    z-index: 1; /* Ensure the content is above the background */
+    transition: max-width 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Add this to Home-Style.css or firstpage-style.css */
+.navbar .nav-link {
+    color: #262626; /* Dark gray, or choose any color you like */
+}
+
+.navbar .nav-link:hover {
+    color: #ff7f50; /* Coral color on hover, or any color you like */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;                   /* Full width navbar */
+    z-index: 10;                    /* Ensure it's above the content */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for separation */
+    padding: 10px 20px; /* Add some padding to make the navbar look more balanced */
+}
+
+/* Media query for small heights (below 500px) */
+@media (max-height: 500px) {
+    header {
+        display: none; /* Hide the header when the height is below 500px */
+    }
+
+    main {
+        padding-top: 0; /* Remove padding to save space */
+        padding-bottom: 0;
+    }
+
+    /* Hide the <p> in the main content */
+    main p {
+        display: none;
+    }
+
+    /* Hide the <h3> in the #login section */
+    #login h3 {
+        display: none;
+    }
+}
