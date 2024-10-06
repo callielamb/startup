@@ -5,4 +5,15 @@ body {
     background-color: #f8f9fa; /* Light background to start with */
 }
 
+/* Styling the Your Gallery section */
+.your-gallery {
+    background-color: #f8f9fa; /* Off-white background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 20px 0;
+    width: 100%; /* Full width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
 /* Add your custom styles below */

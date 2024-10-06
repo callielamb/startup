@@ -1,0 +1,61 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink - Home</title>
+        <link rel="icon" href="favicon.png">
+
+        <!-- Include Bootstrap CSS framework -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" href="home-style.css" />
+    </head>
+    <body>
+        <!-- Header with Navbar "bg-light-->
+        <header class= "navbar bg-light py-3 mb-4">
+            <div class="container-fluid d-flex justify-content-between">
+                <!-- Brand Title and Logout Button -->
+                <div class="d-flex align-items-center">
+                    <h1 class="h3 mb-0">In A Blink</h1>
+                    <a href="index.html" class="btn btn-secondary ms-3">Logout</a> <!-- Logout button with margin-left -->
+                </div>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="game.html">Play</a></li>
+                        <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Login/Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <main class="container text-center">
+            <h2>Welcome to</h2>
+            <img src="INABLINK.png" class="img-fluid my-3" alt="In a Blink logo with a pencil" width="200" height="200">
+
+            <div class="homepage-box">
+                <p class="lead">Compete with your friends to recreate images from memory. You get just a few seconds to see the image, then it's up to you to draw it!</p>
+                
+                <p class="ready">Ready to draw?</p>
+                <a href="game.html" class="btn btn-primary">Start a game!</a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-light py-3 mt-5">
+            <div class="container text-center">
+                <hr />
+                <span class="text-reset">Author: Callie Lambourne</span>
+                <p>Visit my <a href="https://github.com/callielamb/startup.git">GitHub</a></p>
+            </div>
+        </footer>
+    </body>
+</html>
