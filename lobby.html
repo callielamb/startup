@@ -1,0 +1,68 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In A Blink - Lobby</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="Lobby-Style.css" />
+
+        <!-- Include Bootstrap CSS framework -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body class="bg-light d-flex flex-column justify-content-center align-items-center">
+        
+        <!-- Header with Navbar -->
+        <header class="navbar bg-light py-3 mb-4 w-100">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <!-- Brand Title -->
+                <a class="navbar-brand" href="home.html">
+                    <h1 class="h3">In A Blink</h1>
+                </a>
+                <!-- Logout Button -->
+                <a href="index.html" class="btn btn-secondary">Logout</a>
+            </div>
+        </header>
+
+        <!-- Main content (Starting Soon Card and Player Cards in 2x3 Grid) -->
+        <main class="d-flex flex-column justify-content-center align-items-center">
+            <!-- Central "Game Starting Soon" Card -->
+            <div class="card text-center p-4 shadow-lg" style="width: 300px;">
+                <h3 class="card-title">Game Starting Soon...</h3>
+                <p class="card-text">[Waiting for players to join.]</p>
+                <!-- Start Game Button linking to the drawing page -->
+                <a href="drawing.html" class="btn btn-primary mt-3">Start Game</a> <!-- Start Game Button -->
+            </div>
+
+            <!-- Player Cards in 2x3 Grid -->
+            <div class="player-grid mt-4">
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 1</h5>
+                </div>
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 2</h5>
+                </div>
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 3</h5>
+                </div>
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 4</h5>
+                </div>
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 5</h5>
+                </div>
+                <div class="card player-card p-2 mb-3">
+                    <h5 class="text-center">Player 6</h5>
+                </div>
+            </div>
+
+            <!-- Leave Server Button -->
+            <a href="game.html" class="btn btn-danger mt-4">Leave Server</a>
+        </main>
+
+    </body>
+</html>

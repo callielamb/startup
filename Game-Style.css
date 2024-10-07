@@ -1,8 +1,39 @@
-
-/* Custom styles for the Game Lobby page */
-
+/* Fullscreen background */
 body {
-    background-color: #f8f9fa; /* Light background to start with */
+    background: linear-gradient(to bottom, #b8eaf7, #74c3db) !important;
+    margin: 0;
+    padding: 0;; /* Background color consistent with Home page */
 }
 
-/* Add your custom styles below */
+main {
+    min-height: calc(100vh - 150px); /* Adjust this value to fit your header + footer height */
+}
+
+/* Card styles for the content sections */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar customizations */
+.navbar{
+    border: 2px solid #f77f4f; /* Coral border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the navbar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar .nav-link {
+    color: #262626;
+}
+
+.navbar .nav-link:hover {
+    color: #ff7f50;
+}
+
+/* Media query for small heights (below 500px)*/
+@media (max-height: 500px) {
+    .navbar {
+        display: none;  /*Hide the header when the height is below 500px */
+    }
+} 

@@ -49,8 +49,11 @@ img {
     height: auto; /* Ensure images are fully responsive */
 }
 
+/* Footer styling */
 footer {
-    margin-top: 40px;
+    background-color: #f8f9fa; /* Light background for footer */
+    padding: 10px;
+    border-top: 1px solid #ccc;
 }
 
 .navbar{
@@ -89,13 +92,13 @@ button {
 }
 
 
-/* Media query for small heights (below 500px) */
+/* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
-    header {
-        display: none; /* Hide the header when the height is below 500px */
+    .navbar {
+        display: none;  /*Hide the header when the height is below 500px */
     }
 
     footer{
         display:none;
     }
-}
+} 
