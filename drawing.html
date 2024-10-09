@@ -2,7 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <li><a href="game.html">(temporary back button)</a></li>
     <title>In A Blink - Drawing Page</title>
     <link rel="icon" href="favicon.png">
     <link rel="stylesheet" href="Drawing-Style.css" />
@@ -16,30 +15,42 @@
     />
 </head>
 <body>
-    <main>
-        <h1>Drawing Phase</h1>
-        <!--display during the whole game until the voting time-->
-        <p>Once the drawing is done, you'll vote on your favorite recreation!</p>
+    
+    <!-- Header/Navbar (temporary back button) -->
+    <header class="navbar bg-light py-3 mb-4 w-100">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a href="game.html" class="btn btn-secondary">Back to Game</a>
+            <h1 class="h3">Drawing Phase</h1>
+        </div>
+    </header>
 
-        <!-- Placeholder for image from 3rd-party API -->
-        <div id="image-container">
-            <h2>Image to Recreate</h2>
-            <p>[Image Placeholder]</p>
+    <main class="container">
+        <p class="lead text-center">Once the drawing is done, you'll vote on your favorite recreation!</p>
+        <!-- Timer Box centered above the two cards -->
+        <!-- Timer Box centered in relation to the page -->
+        <div id="timer" class="d-flex justify-content-center mb-4">
+            <div class="timer-box text-center p-2">
+                <h3>Time Left: 00:00</h3> <!-- Timer Placeholder -->
+            </div>
+        </div>
+        <!-- Centered Canvas -->
+        <div class="d-flex justify-content-center">
+            <canvas id="drawingCanvas" class="canvas" width="800" height="400">Your browser does not support the HTML5 canvas element.</canvas>
+            <p>canvas</p>
         </div>
 
-        <!-- Placeholder for drawing canvas -->
-        <div id="canvas-container">
-            <h2>Your Drawing</h2>
-            <p>[Drawing Canvas Placeholder]</p>
-        </div>
-
-        <!-- WebSocket Placeholder -->
-        <section>
+        <!-- Real-Time WebSocket Updates -->
+        <section class="my-4 text-center">
             <h4>Real-Time Updates</h4>
             <p>[WebSocket Data Placeholder]</p>
+            <p>Also in the future, there will be 2 popups: 1 for instructions and the other to show the drawing the user will replicate</p>
         </section>
 
-        <button>Submit Drawing</button>
+        <!-- Submit Button linking to the voting page -->
+        <div class="text-center">
+            <a href="voting.html" class="btn btn-primary mt-4">Submit Drawing</a>
+        </div>
     </main>
+
 </body>
 </html>

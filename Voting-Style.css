@@ -1,8 +1,49 @@
-
-/* Custom styles for the Voting page */
-
+/* Body background */
 body {
-    background-color: #f8f9fa; /* Light background to start with */
+    background: linear-gradient(to bottom, #b8eaf7, #74c3db);
+    margin: 0;
+    padding: 0;
 }
 
-/* Add your custom styles below */
+/* Card styling for original drawing and player cards */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Placeholder for the original drawing */
+.original-placeholder {
+    height: 100%;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Player cards grid layout */
+.col-lg-4, .col-md-6 {
+    display: flex;
+    justify-content: center;
+}
+
+/* Adjust the padding and spacing between the player cards */
+.p-2 {
+    padding: 10px !important;
+}
+
+/* Text spacing between the two rows of player cards */
+.my-4 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+
+/* Media query for small heights (below 500px) */
+@media (max-height: 500px) {
+    .navbar {
+        display: none;  /* Hide the header when the height is below 500px */
+    }
+}
