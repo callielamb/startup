@@ -15,11 +15,11 @@ main {
 
 /* Footer styling */
 footer {
-    background-color: #f8f9fa;
-    padding: 20px;
+    padding: 5px;
     margin-top: auto; /* Push the footer to the bottom */
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #979797;
     width: 100%;
+    font-size: 14px;
 }
 
 /* About Section Styling */
