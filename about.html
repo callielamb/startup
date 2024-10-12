@@ -1,58 +1,65 @@
-<html lang="en"></html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>In A Blink HTML</title>
-        <link rel="icon" href="favicon.png">
-        <link rel="stylesheet" href="About-Style.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In A Blink - About</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="About-Style.css" />
 
-        <!-- Include bootstrap CSS framework -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-            crossorigin="anonymous"
-        />
-    </head>
-    <body>
-        <header>
+    <!-- Include Bootstrap CSS framework -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous"
+    />
+</head>
+<body>
+    <!-- Header with Navbar from the homepage -->
+    <header class="navbar bg-light py-3 mb-4">
+        <div class="container-fluid d-flex justify-content-between">
+            <!-- Brand Title and Logout Button -->
             <div class="d-flex align-items-center">
                 <a class="navbar-brand" href="home.html">
                     <h1 class="h3">In A Blink</h1>
                 </a>
-                <a href="index.html" class="btn btn-secondary ms-3">Logout</a> <!-- Logout button with margin-left -->
+                <a href="index.html" class="btn btn-secondary ms-3">Logout</a> <!-- Logout button -->
             </div>
             <nav>
-              <menu>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="game.html">Play</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="about.html">About</a></li>
-              </menu>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="game.html">Play</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Login/Register</a></li>
+                </ul>
             </nav>
+        </div>
+    </header>
 
-            <hr />
-        </header>
-
-        <main>
+    <!-- Main Content -->
+    <main class="container">
+        <div class="about-section text-center p-4 rounded shadow-sm">
             <h2>About In A Blink</h2>
             <p>In A Blink is a fun, fast-paced multiplayer drawing game where players recreate images from memory. Each round, a random image is displayed for a few seconds, and players then draw what they remember. Afterward, participants vote on whose drawing is the most accurate or creative.</p>
             
             <h3>Features:</h3>
-            <ul>
+            <ul class="list-unstyled">
                 <li>Multiplayer gameplay</li>
                 <li>Time-limited drawing challenges</li>
                 <li>Real-time voting and leaderboard</li>
             </ul>
-            <a href="index.html"></a>
-                <button>Logout</button>
-            </a>
-        </main>
-        
+        </div>
+    </main>
 
-        <footer>
+    <!-- Footer from the homepage -->
+    <footer class="bg-light py-3 mt-5">
+        <div class="container text-center">
             <hr />
-            <p>Callie Lambourne's <a href="https://github.com/callielamb/startup.git">GitHub</a></p>
-        </footer>
-    </body>
+            <span class="text-reset">Author: Callie Lambourne</span>
+            <p>Visit my <a href="https://github.com/callielamb/startup.git">GitHub</a></p>
+        </div>
+    </footer>
+</body>
 </html>

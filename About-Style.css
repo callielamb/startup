@@ -1,8 +1,87 @@
-
-/* Custom styles for the About page */
-
+/* Body and Background */
 body {
-    background-color: #f8f9fa; /* Light background to start with */
+    background: linear-gradient(to bottom, #b8eaf7, #74c3db); /* Light blue gradient */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up the full viewport height */
 }
 
-/* Add your custom styles below */
+/* Main content should grow to fill available space */
+main {
+    flex-grow: 1; /* Ensures the main content takes up available space */
+}
+
+/* Footer styling */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-top: auto; /* Push the footer to the bottom */
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+/* About Section Styling */
+.about-section {
+    background-color: #f8f9fa; /* Off-white background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center all text */
+}
+
+/* Heading styles */
+h2, h3 {
+    color: #333;
+}
+
+/* Navbar Customization */
+.navbar {
+    border: 2px solid #f77f4f; /* Coral border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.nav-link {
+    color: #333 !important; /* Dark gray */
+}
+
+.nav-link:hover {
+    color: #ff7f50 !important; /* Coral on hover */
+}
+
+/* Custom button colors */
+.btn-primary {
+    background-color: #f77f4f !important; /* Coral */
+    border-color: #d97046 !important;
+}
+
+.btn-primary:hover {
+    background-color: #e66b3c !important; /* Darker coral */
+    border-color: #e66b3c !important;
+}
+
+/* Remove list bullets */
+.list-unstyled {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Adjust margin for spacing */
+.mt-3 {
+    margin-top: 20px;
+}
+
+/* Media query for small heights (below 500px)*/
+@media (max-height: 500px) {
+    .navbar {
+        display: none;  /*Hide the header when the height is below 500px */
+    }
+
+    footer{
+        display:none;
+    }
+} 

@@ -1,19 +1,66 @@
-
-/* Custom styles for the Leaderboard page */
-
+/* Body background */
 body {
-    background-color: #f8f9fa; /* Light background to start with */
+    background: linear-gradient(to bottom, #b8eaf7, #74c3db);
+    margin: 0;
+    padding: 0;
 }
 
-/* Styling the Your Gallery section */
+/* Table styling with coral shades */
+.leaderboard-table {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-table thead {
+    background-color: #f77f4f; /* Darker coral for header */
+    color: white;
+}
+
+.leaderboard-table tbody tr:nth-child(odd) {
+    background-color: #f7c8a3; /* Light coral for odd rows */
+}
+
+.leaderboard-table tbody tr:nth-child(even) {
+    background-color: #f7a97a; /* Medium coral for even rows */
+}
+
+/* Navbar similar to home */
+.navbar {
+    border: 2px solid #f77f4f; /* Coral border */
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-link {
+    color: #262626;
+}
+
+.navbar .nav-link:hover {
+    color: #ff7f50;
+}
+
+/* Styling for the gallery section */
 .your-gallery {
-    background-color: #f8f9fa; /* Off-white background */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px;
-    margin: 20px 0;
-    width: 100%; /* Full width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Add your custom styles below */
+/* Add some margin around the elements */
+main {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+
+/* Media query for small heights (below 500px) */
+@media (max-height: 500px) {
+    .navbar {
+        display: none;  /* Hide the header when the height is below 500px */
+    }
+}
