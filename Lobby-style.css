@@ -34,7 +34,7 @@ main {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-/* Player grid: 3x2 layout for 6 players */
+/* Player grid: 3x2 layout for <6 players */
 .player-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
