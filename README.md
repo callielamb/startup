@@ -82,4 +82,4 @@ For this deliverable I properly styled the application into its better appearanc
 - [x] **Responsive to window resizing** - My webpage should resize for a smaller window screen on a laptop. I haven't changed anything for phones or smaller than computer devices. The header and footer would disappear for these pages.
 - [x] **Application elements** - I have contrasting colors and elements. Everything is coordinated and the theme is white, blue and orange. 
 - [x] **Application text content** - Consistent fonts and emphasis on the more important text.
-- [ ] **Application images** - I have a logo on the login and homepage that are styled accordingly. There will be more images later but I can't style them yet. I also added some little images on the about page just for the look.
+- [x] **Application images** - I have a logo on the login and homepage that are styled accordingly. There will be more images later but I can't style them yet. I also added some little images on the about page just for the look.
