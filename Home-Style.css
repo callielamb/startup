@@ -44,7 +44,7 @@ p.text-muted {
 
 img {
     max-width: 100%;
-    height: auto; /* Ensure images are fully responsive */
+    height: auto;
 }
 
 /* Footer styling */
@@ -74,7 +74,7 @@ p.lead {
     margin-bottom: 20px;
 }
 
-/* Custom button colors to complement the light blue background */
+/* Custom button colors */
 .btn-primary {
     background-color: #f77f4f !important; /* Coral */
     border-color: #d97046 !important;
@@ -93,7 +93,7 @@ button {
 /* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /*Hide the header when the height is below 500px */
+        display: none;  
     }
 
     footer{

@@ -4,6 +4,12 @@ body {
     margin: 0;
     padding: 0;
 }
+.navbar{
+    border: 2px solid #f77f4f; /* Coral border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the navbar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
 
 /* Card styling for original drawing and player cards */
 .card {
@@ -41,9 +47,9 @@ body {
 }
 
 
-/* Media query for small heights (below 500px) */
+/* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /* Hide the header when the height is below 500px */
+        display: none;
     }
-}
+} 

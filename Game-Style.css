@@ -2,11 +2,11 @@
 body {
     background: linear-gradient(to bottom, #b8eaf7, #74c3db) !important;
     margin: 0;
-    padding: 0;; /* Background color consistent with Home page */
+    padding: 0;
 }
 
 main {
-    min-height: calc(100vh - 150px); /* Adjust this value to fit your header + footer height */
+    min-height: calc(100vh - 150px);
 }
 
 /* Card styles for the content sections */
@@ -34,6 +34,6 @@ main {
 /* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /*Hide the header when the height is below 500px */
+        display: none; 
     }
 } 

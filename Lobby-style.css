@@ -1,8 +1,8 @@
 /* Remove any potential margin or padding from the body */
 body {
     background: linear-gradient(to bottom, #b8eaf7, #74c3db) !important;
-    margin: 0;  /* Ensure no margin around the body */
-    padding: 0; /* Ensure no padding in the body */
+    margin: 0;
+    padding: 0;
 }
 
 /* Navbar customizations */
@@ -24,7 +24,7 @@ body {
 
 /* Main content padding adjustment to avoid overlap with navbar */
 main {
-    margin-top: 80px; /* Space to account for the fixed navbar height */
+    margin-top: 80px;
 }
 
 /* Card styling */
@@ -56,9 +56,9 @@ main {
     text-align: center;
 }
 
-/* Media query for small heights (below 500px) */
+/* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /* Hide the header when the height is below 500px */
+        display: none; 
     }
-}
+} 

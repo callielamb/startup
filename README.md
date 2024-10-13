@@ -73,3 +73,13 @@ For this deliverable I built out the structure of my application using HTML.
 - [x] **Images** - Currently, the game page contains placeholders for images, which will eventually pull from a third-party image service. 
 - [x] **Login** - Input box and submit button for login(username). In the future, player data, like scores and past drawings, will be pulled from the database.
 - [x] **WebSocket** - Placeholders exist on the game page for WebSocket data, which will be used to sync real-time drawing actions and game updates between players.
+
+## CSS deliverable
+For this deliverable I properly styled the application into its better appearance.
+
+- [x] **Header, footer, and main content body**: Header is visible on all pages (the drawing/voting pages only have a logout button on the header), footer is only on the home and about page. The main content varies for each page but most lie on a card created bby bootstrap.
+- [x] **Navigation elements** - I have navigation to every page and on every page there is an option to logout. When you hover over a nav link, the color darkens. 
+- [x] **Responsive to window resizing** - My webpage should resize for a smaller window screen on a laptop. I haven't changed anything for phones or smaller than computer devices. The header and footer would disappear for these pages.
+- [x] **Application elements** - I have contrasting colors and elements. Everything is coordinated and the theme is white, blue and orange. 
+- [x] **Application text content** - Consistent fonts and emphasis on the more important text.
+- [ ] **Application images** - I have a logo on the login and homepage that are styled accordingly. There will be more images later but I can't style them yet. I also added some little images on the about page just for the look.

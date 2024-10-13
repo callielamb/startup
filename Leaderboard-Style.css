@@ -58,9 +58,9 @@ main {
 }
 
 
-/* Media query for small heights (below 500px) */
+/* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /* Hide the header when the height is below 500px */
+        display: none;
     }
-}
+} 

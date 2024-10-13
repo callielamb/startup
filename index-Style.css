@@ -10,7 +10,7 @@
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(5px); /* Apply the blur only to the background */
-    z-index: -1; /* Ensure background stays behind the content */
+    z-index: -1; /* background stays behind the content */
 }
 
 header {
@@ -21,35 +21,34 @@ header {
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
     z-index: 10; /* Keep header on top */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for separation */
-    padding: 4px; /* Adjust padding as needed */
+    padding: 4px;
 }
 
-/* Main content container (card) */
+/* Main card */
 .main-content {
-    position: relative; /* Keep content on top of the background */
+    position: relative; /* Keep on top of the background */
     min-width: 300px; /* Prevent the card from shrinking too much */
     margin: 120px auto; /* Center the card and add space from the top to account for the navbar */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     z-index: 1; /* Ensure the content is above the background */
     transition: padding 0.3s ease;
     box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-/* Add this to Home-Style.css or firstpage-style.css */
 .navbar .nav-link {
-    color: #262626; /* Dark gray, or choose any color you like */
+    color: #262626; 
 }
 
 .navbar .nav-link:hover {
-    color: #ff7f50; /* Coral color on hover, or any color you like */
+    color: #ff7f50; 
 }
 
 /* Media query for small heights (below 500px) */
 @media (max-height: 500px) {
     header {
-        display: none; /* Hide the header when the height is below 500px */
+        display: none;
     }
 
     main {

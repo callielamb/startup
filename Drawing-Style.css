@@ -9,7 +9,7 @@ body {
     border: 2px solid #f77f4f; /* Coral border */
     border-radius: 5px; /* Rounded corners */
     padding: 10px; /* Padding inside the navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
 }
 
 /* Timer Box Styling */
@@ -29,7 +29,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Custom button color to match the theme */
+/* Custom button */
 .btn-primary {
     background-color: #ff7f50 !important; /* Coral color */
     border-color: #ff7f50 !important;
@@ -42,17 +42,16 @@ body {
 
 /* Add padding below the submit button */
 .text-center {
-    margin-bottom: 40px; /* Adjust this value as needed */
+    margin-bottom: 40px;
 }
 
-/* Media query for small heights (below 500px) */
+/* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
     .navbar {
-        display: none;  /* Hide the header when the height is below 500px */
+        display: none;
     }
-}
+} 
 
-/* Responsive layout for smaller screens */
 @media (max-width: 768px) {
     .canvas {
         width: 100%; /* Make the canvas responsive */
