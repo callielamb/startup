@@ -25,11 +25,11 @@ body {
 }
 
 /* Navbar similar to home */
-.navbar {
+.navbar{
     border: 2px solid #f77f4f; /* Coral border */
-    border-radius: 0 0 5px 5px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the navbar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .navbar .nav-link {
@@ -49,14 +49,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-
-/* Add some margin around the elements */
-main {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px;
-}
-
 
 /* Media query for small heights (below 500px)*/
 @media (max-height: 500px) {
