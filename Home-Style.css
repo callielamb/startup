@@ -10,7 +10,7 @@ body {
     background-color: #f8f9fa; /* Off-white background */
     border-radius: 10px; /* Rounded corners */
     padding: 30px; /* Space inside the box */
-    margin: 20px 0; /* Space around the box */
+    margin: 5px 0; /* Space around the box */
     width: 100%; /* Full width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     text-align: center; /* Center-align the content */
@@ -50,7 +50,6 @@ img {
 /* Footer styling */
 footer {
     background-color: #f8f9fa; /* Light background for footer */
-    padding: 10px;
     border-top: 1px solid #ccc;
 }
 
