@@ -9,6 +9,10 @@
     text-align: center; /* Center-align the content */
 }
 
+h2{
+    color: black !important;
+}
+
 /* Gallery section text */
 img {
     max-width: 100%;
