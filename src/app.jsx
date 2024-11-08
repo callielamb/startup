@@ -5,6 +5,9 @@ import { Play } from './play/game.jsx';
 import { Leaderboard } from './leaderboard/leaderboard.jsx';
 import { About } from './about/about.jsx';
 import { Home } from './home/home.jsx';
+import { Lobby } from './play/lobby/lobby.jsx';
+import { Draw } from './play/drawing/drawing.jsx';
+import { Vote } from './play/voting/voting.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -37,6 +40,9 @@ export default function App() {
                 <Route path="/play" element={<Play />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/vote" element={<Vote />} />
+                <Route path="/draw" element={<Draw />} />
+                <Route path="/lobby" element={<Lobby />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
     

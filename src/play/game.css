@@ -1,39 +1,10 @@
-/* Fullscreen background */
-body {
-    background: linear-gradient(to bottom, #b8eaf7, #74c3db) !important;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    min-height: calc(100vh - 150px);
-}
-
 /* Card styles for the content sections */
 .card {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar customizations */
-.navbar{
-    border: 2px solid #f77f4f; /* Coral border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding inside the navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+.container-fluid {
+    max-width: 100%;
+    padding: 0 15px; /* Optional padding */
 }
-
-.navbar .nav-link {
-    color: #262626;
-}
-
-.navbar .nav-link:hover {
-    color: #ff7f50;
-}
-
-/* Media query for small heights (below 500px)*/
-@media (max-height: 500px) {
-    .navbar {
-        display: none; 
-    }
-} 

@@ -1,27 +1,3 @@
-/* Remove any potential margin or padding from the body */
-body {
-    background: linear-gradient(to bottom, #b8eaf7, #74c3db) !important;
-    margin: 0;
-    padding: 0;
-}
-
-/* Navbar customizations */
-.navbar{
-    position:fixed;
-    border: 2px solid #f77f4f; /* Coral border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding inside the navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.navbar .nav-link {
-    color: #262626;
-}
-
-.navbar .nav-link:hover {
-    color: #ff7f50;
-}
-
 /* Main content padding adjustment to avoid overlap with navbar */
 main {
     margin-top: 80px;
@@ -55,10 +31,3 @@ main {
     justify-content: center;
     text-align: center;
 }
-
-/* Media query for small heights (below 500px)*/
-@media (max-height: 500px) {
-    .navbar {
-        display: none; 
-    }
-} 

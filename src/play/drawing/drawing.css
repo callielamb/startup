@@ -1,17 +1,3 @@
-/* Body background color */
-body {
-    background: linear-gradient(to bottom, #b8eaf7, #74c3db);
-    margin: 0;
-    padding: 0;
-}
-
-.navbar{
-    border: 2px solid #f77f4f; /* Coral border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding inside the navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
-}
-
 /* Timer Box Styling */
 .timer-box {
     width: 200px;
@@ -44,13 +30,6 @@ body {
 .text-center {
     margin-bottom: 40px;
 }
-
-/* Media query for small heights (below 500px)*/
-@media (max-height: 500px) {
-    .navbar {
-        display: none;
-    }
-} 
 
 @media (max-width: 768px) {
     .canvas {

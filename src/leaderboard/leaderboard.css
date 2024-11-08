@@ -1,43 +1,21 @@
-/* Body background */
-body {
-    background: linear-gradient(to bottom, #b8eaf7, #74c3db);
-    margin: 0;
-    padding: 0;
-}
-
 /* Table styling with coral shades */
 .leaderboard-table {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure the table takes full width of its container */
 }
 
 .leaderboard-table thead {
-    background-color: #f77f4f; /* Darker coral for header */
-    color: white;
+    background-color: #f77f4f !important;  /* Darker coral for header */
+    color: white !important;
 }
 
 .leaderboard-table tbody tr:nth-child(odd) {
-    background-color: #f7c8a3; /* Light coral for odd rows */
+    background-color: #f7c8a3 !important; /* Light coral for odd rows */
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
-    background-color: #f7a97a; /* Medium coral for even rows */
-}
-
-/* Navbar similar to home */
-.navbar{
-    border: 2px solid #f77f4f; /* Coral border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding inside the navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.navbar .nav-link {
-    color: #262626;
-}
-
-.navbar .nav-link:hover {
-    color: #ff7f50;
+    background-color: #f7a97a !important; /* Medium coral for even rows */
 }
 
 /* Styling for the gallery section */
@@ -50,9 +28,13 @@ body {
     text-align: center;
 }
 
-/* Media query for small heights (below 500px)*/
-@media (max-height: 500px) {
-    .navbar {
-        display: none;
+/* Adjustments for responsive layout */
+@media (max-width: 768px) {
+    .leaderboard-table {
+        font-size: 0.9rem; /* Slightly smaller text on smaller screens */
     }
-} 
+
+    .your-gallery {
+        padding: 20px;
+    }
+}
