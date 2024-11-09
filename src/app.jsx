@@ -8,6 +8,7 @@ import { Home } from './home/home.jsx';
 import { Lobby } from './play/lobby/lobby.jsx';
 import { Draw } from './play/drawing/drawing.jsx';
 import { Vote } from './play/voting/voting.jsx';
+import { Results } from './play/results/results.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path="/vote" element={<Vote />} />
                 <Route path="/draw" element={<Draw />} />
                 <Route path="/lobby" element={<Lobby />} />
+                <Route path="/results" element={<Results />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
     

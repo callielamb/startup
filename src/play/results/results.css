@@ -1,0 +1,17 @@
+.winner-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .comparison-box {
+    width: 300px; /* Adjust as needed */
+    text-align: center;
+  }
+  
+  .image-placeholder img {
+    border: 2px solid #ccc;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
