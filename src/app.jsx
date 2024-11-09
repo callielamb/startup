@@ -95,9 +95,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Login userName={userName} authState={authState} onAuthChange={handleAuthChange} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/home" element={<Home />} /> {/* No PrivateRoute temporarily */}
-          <Route path="/play" element={<Play />} />   {/* No PrivateRoute temporarily */}
-          <Route path="/leaderboard" element={<Leaderboard />} /> {/* No PrivateRoute temporarily */}
+          <Route path="/home" element={<Home />} /> 
+          <Route path="/play" element={<Play />} />  
+          <Route path="/leaderboard" element={<Leaderboard />} /> 
           <Route path="/vote" element={<Vote />} />
           <Route path="/draw" element={<Draw />} />
           <Route path="/lobby" element={<Lobby />} />
