@@ -97,4 +97,4 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
   - [x] **vote** - Once a user submits their drawing, they are routed to the Vote page. Here, they see player submissions and can vote by clicking on the preferred drawing. Local storage currently tracks scores, and a mock timer counts down for the voting period.
   - [x] **results** - After voting, users are routed to the Results page. This page shows a side-by-side comparison of the original drawing and the winning drawing. Placeholder logic provides structure, with plans for real-time vote count and result display using backend support.
 - [x] **Router** - navigation between components, allowing seamless transitions across game phases: login, lobby, home, about, leaderboard, drawing, voting, and results.
-- [x] **Hooks** - useState and useEffect for managing state across components
+- [x] **Hooks** - useState and useEffect for managing state across components. (loading scores from local storage on the Leaderboard or managing timers in Drawing and Vote)
