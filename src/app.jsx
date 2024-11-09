@@ -22,24 +22,26 @@ export default function App() {
     const storedUserName = localStorage.getItem('userName');
     if (storedUserName) {
       setUserName(storedUserName);
-      setAuthState(AuthState.Authenticated);
+      setAuthState(AuthState.Authenticated); // Ensure the state is set to Authenticated if there's a stored user
     } else {
       setAuthState(AuthState.Unauthenticated);
     }
   }, []);
 
-  // Handle authentication changes
   const handleAuthChange = (newUserName, newAuthState) => {
     setAuthState(newAuthState);
     setUserName(newUserName);
     if (newAuthState === AuthState.Authenticated) {
-      localStorage.setItem('userName', newUserName);
+      localStorage.setItem('userName', newUserName); // Store the username in local storage
     } else {
       localStorage.removeItem('userName');
     }
   };
 
-  //redirects to login if not authenticated
+  const handleLogout = () => {
+    handleAuthChange('', AuthState.Unauthenticated); // Update state to unauthenticated
+  };
+
   const PrivateRoute = ({ children }) => {
     return authState === AuthState.Authenticated ? children : <Navigate to="/" />;
   };
@@ -54,12 +56,13 @@ export default function App() {
                 <h1 className="h3">In A Blink</h1>
               </NavLink>
               {authState === AuthState.Authenticated && (
-                <button
+                <NavLink
                   className="btn btn-secondary ms-3"
-                  onClick={() => handleAuthChange('', AuthState.Unauthenticated)}
+                  to="/" // Redirect to login on logout
+                  onClick={handleLogout} // Handle logout
                 >
                   Logout
-                </button>
+                </NavLink>
               )}
             </div>
             <nav>
@@ -90,22 +93,15 @@ export default function App() {
         </header>
 
         <Routes>
-          {/* Public Routes */}
-          <Route
-            path="/"
-            element={<Login userName={userName} authState={authState} onAuthChange={handleAuthChange} />}
-          />
+          <Route path="/" element={<Login userName={userName} authState={authState} onAuthChange={handleAuthChange} />} />
           <Route path="/about" element={<About />} />
-
-          {/* Protected Routes */}
-          <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="/play" element={<PrivateRoute><Play /></PrivateRoute>} />
-          <Route path="/leaderboard" element={<PrivateRoute><Leaderboard /></PrivateRoute>} />
-          <Route path="/vote" element={<PrivateRoute><Vote /></PrivateRoute>} />
-          <Route path="/draw" element={<PrivateRoute><Draw /></PrivateRoute>} />
-          <Route path="/lobby" element={<PrivateRoute><Lobby /></PrivateRoute>} />
-          <Route path="/results" element={<PrivateRoute><Results /></PrivateRoute>} />
-
+          <Route path="/home" element={<Home />} /> {/* No PrivateRoute temporarily */}
+          <Route path="/play" element={<Play />} />   {/* No PrivateRoute temporarily */}
+          <Route path="/leaderboard" element={<Leaderboard />} /> {/* No PrivateRoute temporarily */}
+          <Route path="/vote" element={<Vote />} />
+          <Route path="/draw" element={<Draw />} />
+          <Route path="/lobby" element={<Lobby />} />
+          <Route path="/results" element={<Results />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

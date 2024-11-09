@@ -19,6 +19,16 @@ export function Login({ userName, authState, onAuthChange }) {
     }
   };
 
+  const handleCreate = () => {
+    if (usernameInput && passwordInput) {
+      // For now, treat 'Create' the same as 'Login' for authentication
+      onAuthChange(usernameInput, AuthState.Authenticated);
+      navigate('/home'); // Redirect to home after account creation
+    } else {
+      alert('Please enter both username and password');
+    }
+  };
+
   return (
     <main className="container-fluid d-flex align-items-center justify-content-center vh-100">
       <div className="main-content card p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
@@ -54,7 +64,7 @@ export function Login({ userName, authState, onAuthChange }) {
             </div>
             <div className="d-flex justify-content-between">
               <button type="submit" className="btn btn-primary">Login</button>
-              <button type="button" className="btn btn-secondary">Create</button>
+              <button type="button" className="btn btn-secondary" onClick={handleCreate}>Create</button>
             </div>
           </form>
         </section>
