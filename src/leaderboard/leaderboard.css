@@ -2,7 +2,7 @@
 .leaderboard-table {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure the table takes full width of its container */
+    width: 100%; 
 }
 
 .leaderboard-table thead {
@@ -28,10 +28,9 @@
     text-align: center;
 }
 
-/* Adjustments for responsive layout */
 @media (max-width: 768px) {
     .leaderboard-table {
-        font-size: 0.9rem; /* Slightly smaller text on smaller screens */
+        font-size: 0.9rem; 
     }
 
     .your-gallery {

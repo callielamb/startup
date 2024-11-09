@@ -4,9 +4,9 @@
     border-radius: 10px; /* Rounded corners */
     padding: 30px; /* Space inside the box */
     margin: 5px 0; /* Space around the box */
-    width: 100%; /* Full width */
+    width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    text-align: center; /* Center-align the content */
+    text-align: center;
 }
 
 h2{
@@ -30,7 +30,6 @@ img {
     font-size:1.3rem;
 }
 
-/* Custom button colors */
 .btn-primary {
     background-color: #f77f4f !important; /* Coral */
     border-color: #d97046 !important;

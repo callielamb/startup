@@ -13,14 +13,14 @@ export function Draw() {
   useEffect(() => {
     // Display "Get ready to memorize!" for 2 seconds
     const startDelay = setTimeout(() => {
-      setShowMessage(false); // Hide "Get ready" message
-      setShowImage(true); // Show the image
+      setShowMessage(false); 
+      setShowImage(true); 
 
       // Start the countdown once the image is shown
       const countdown = setInterval(() => {
         setTimer((prev) => {
           if (prev <= 1) {
-            setShowImage(false); // Hide the image when timer ends
+            setShowImage(false); 
             clearInterval(countdown); // Stop the timer
             return 0;
           }
@@ -29,7 +29,7 @@ export function Draw() {
       }, 1000);
     }, 2000); // 2-second delay
 
-    // Clean up the timers on component unmount
+    
     return () => {
       clearTimeout(startDelay);
     };
@@ -111,7 +111,7 @@ export function Draw() {
             onMouseDown={startDrawing}
             onMouseMove={draw}
             onMouseUp={endDrawing}
-            onMouseLeave={endDrawing} // End drawing if mouse leaves canvas
+            onMouseLeave={endDrawing}
           >
             Your browser does not support the HTML5 canvas element.
           </canvas>

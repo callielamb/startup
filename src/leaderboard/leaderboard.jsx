@@ -15,7 +15,7 @@ export function Leaderboard() {
       scoreRows.push(
         <tr key={i}>
           <td>{i + 1}</td> {/* Rank starts from 1 */}
-          <td>{score.name.split('@')[0]}</td> {/* Display name before "@" */}
+          <td>{score.name}</td> {/* Display full username */}
           <td>{score.score}</td>
           <td>{score.date}</td>
         </tr>

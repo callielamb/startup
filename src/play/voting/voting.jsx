@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { useNavigate } from 'react-router-dom';
 import './voting.css';
 
 export function Vote() {
@@ -40,7 +40,7 @@ export function Vote() {
       // Navigate to results page when timer hits zero
       if (timer === 1) {
         clearInterval(countdown);
-        navigate('/results'); // Adjust '/results' to your actual route
+        navigate('/results');
       }
 
       return () => clearInterval(countdown); // Cleanup interval on unmount

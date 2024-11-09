@@ -25,14 +25,12 @@ header {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    z-index: 1; /* Ensure the content is above the background */
+    z-index: 1; /* content is above the background */
     transition: padding 0.3s ease;
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    box-sizing: border-box; /* padding doesn't affect width */
 }
 
-/* Media query for small heights (below 500px) */
 @media (max-height: 500px) {
-    /* Hide the image when the width is below 500px */
     .logo-image {
         display: none;
     }
