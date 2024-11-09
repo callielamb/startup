@@ -83,3 +83,18 @@ For this deliverable I properly styled the application into its better appearanc
 - [x] **Application elements** - I have contrasting colors and elements. Everything is coordinated and the theme is white, blue and orange. 
 - [x] **Application text content** - Consistent fonts and emphasis on the more important text.
 - [x] **Application images** - I have a logo on the login and homepage that are styled accordingly. There will be more images later but I can't style them yet. I also added some little images on the about page just for the look.
+
+## React deliverable
+For this deliverable, I used JavaScript and React to provide a rough mockup of the application's functionality for a single user experience. Each game phase has placeholders, allowing for future enhancements
+- [x] **Bundled and transpiled** - done!
+- [x] **Components** - Login, Home, Lobby, Drawing, Vote, Results, Leaderboard, and About. Each component uses mock functions to simulate functionality
+  - [x] **login** - Users can log in using a form. Once logged in, they are routed to the Home page.
+  - [x] **home** - entry point for authenticated users, providing navigation to join or create a game lobby.
+  - [x] **leaderboard** - displays player scores fetched from local storage, with columns for player name, score, and date. This will be replaced with persistent storage via a database, displaying high scores across games.
+  - [ ] **about** - didn't change, provides information about the game and its purpose.
+  - [x] **lobby** - users join a game lobby hosted by another player or create their own. Placeholders for real-time WebSocket integration for showing live players and host designation.
+  - [x] **draw** - displays an image for users to memorize and replicate. After 10 seconds, the image disappears, and users are prompted to draw from memory on the canvas. Placeholder logic shows the timer and hides the image, but a future WebSocket integration could synchronize timers across users in a real game.
+  - [x] **vote** - Once a user submits their drawing, they are routed to the Vote page. Here, they see player submissions and can vote by clicking on the preferred drawing. Local storage currently tracks scores, and a mock timer counts down for the voting period.
+  - [x] **results** - After voting, users are routed to the Results page. This page shows a side-by-side comparison of the original drawing and the winning drawing. Placeholder logic provides structure, with plans for real-time vote count and result display using backend support.
+- [x] **Router** - navigation between components, allowing seamless transitions across game phases: login, lobby, home, about, leaderboard, drawing, voting, and results.
+- [x] **Hooks** - useState and useEffect for managing state across components. (loading scores from local storage on the Leaderboard or managing timers in Drawing and Vote)
