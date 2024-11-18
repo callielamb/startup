@@ -1,10 +1,16 @@
 const express = require('express');
-const fetch = require('node-fetch'); // To fetch the image from picsum
+const fetch = require('node-fetch'); // To fetch the image from Picsum
+const path = require('path'); // To handle path resolution
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
+// Serve static files from the 'build' directory (React build folder)
+app.use(express.static(path.join(__dirname, 'build'))); // Serve files from the 'build' folder
+
+app.use(express.json());
+
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
 
 // Store the image URL temporarily in memory for the round
 let currentRoundImage = '';
@@ -32,10 +38,6 @@ app.get('/api/resetImage', (req, res) => {
   res.status(204).end();
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
-
 let userScore = {}; // Store the user's score by username
 
 // Endpoint to update the current user's score
@@ -50,16 +52,26 @@ app.post('/api/updateScore', (req, res) => {
   res.status(200).send({ message: 'Score updated' });
 });
 
+// Get leaderboard
 app.get('/api/leaderboard', (req, res) => {
-    const leaderboardArray = Object.entries(userScore)
-      .map(([username, score]) => ({ username, score }))
-      .sort((a, b) => b.score - a.score); // Sort by score descending
-  
-    res.json(leaderboardArray);
-  });
+  const leaderboardArray = Object.entries(userScore)
+    .map(([username, score]) => ({ username, score }))
+    .sort((a, b) => b.score - a.score); // Sort by score descending
+  res.json(leaderboardArray);
+});
 
-  app.get('/api/score', (req, res) => {
-    const username = req.query.username;  // Fetch the username from query params
-    const score = userScore[username] || 0;  // Return the user's score (0 if not found)
-    res.json({ score });
-  });
+// Get user's score
+app.get('/api/score', (req, res) => {
+  const username = req.query.username;  // Fetch the username from query params
+  const score = userScore[username] || 0;  // Return the user's score (0 if not found)
+  res.json({ score });
+});
+
+// Catch-all route for React Router to handle client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html')); // Serve index.html for all routes
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
