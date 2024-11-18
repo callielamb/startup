@@ -100,6 +100,7 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
 - [x] **Hooks** - useState and useEffect for managing state across components. (loading scores from local storage on the Leaderboard or managing timers in Drawing and Vote)
 
 ## Service deliverable
+(still figuring out voting across users)
 - [x] **Node.js/Express HTTP service** 
 - [x] **Static middleware for frontend** 
 - [X] **Calls to third party endpoints** - using https://picsum.photos/ as my 3rd party images for the game
