@@ -11,16 +11,33 @@ export function Draw() {
   const isDrawingRef = useRef(false); // Track if the user is currently drawing
 
   useEffect(() => {
+    // Check if image is already stored in sessionStorage
+    const storedImage = sessionStorage.getItem('gameImage');
+    if (storedImage) {
+      setImageUrl(storedImage);  // Use the stored image for the round
+    } else {
+      // Fetch a new image if not stored
+      const fetchImage = async () => {
+        const response = await fetch('/api/getImage');
+        const data = await response.json();
+        const newImageUrl = data.imageUrl;
+        setImageUrl(newImageUrl);
+        sessionStorage.setItem('gameImage', newImageUrl);  // Store image URL for the round
+      };
+
+      fetchImage();
+    }
+
     // Display "Get ready to memorize!" for 2 seconds
     const startDelay = setTimeout(() => {
-      setShowMessage(false); 
-      setShowImage(true); 
+      setShowMessage(false);
+      setShowImage(true);
 
       // Start the countdown once the image is shown
       const countdown = setInterval(() => {
         setTimer((prev) => {
           if (prev <= 1) {
-            setShowImage(false); 
+            setShowImage(false);
             clearInterval(countdown); // Stop the timer
             return 0;
           }
@@ -29,11 +46,10 @@ export function Draw() {
       }, 1000);
     }, 2000); // 2-second delay
 
-    
     return () => {
       clearTimeout(startDelay);
     };
-  }, []);
+  }, []);  // Empty dependency array ensures this runs once on component mount
 
   // Initialize the canvas context only when the canvas is displayed
   useEffect(() => {

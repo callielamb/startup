@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './results.css';
 
-export function Results({ winnerName, originalImageUrl, winnerImageUrl }) {
+export function Results({ winnerName, winnerImageUrl }) {
+  const [originalImageUrl, setOriginalImageUrl] = useState('');
+
+  useEffect(() => {
+    // Fetch the stored image URL for consistency across pages
+    const storedImage = sessionStorage.getItem('gameImage');
+    if (storedImage) {
+      setOriginalImageUrl(storedImage);  // Set the original image URL from sessionStorage
+    }
+  }, []);
+
   return (
     <main className="container my-5 text-center">
       {/* Winner's Name */}
