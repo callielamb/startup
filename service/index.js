@@ -1,10 +1,11 @@
 const express = require('express');
 const fetch = require('node-fetch'); // To fetch the image from picsum
+const path = require('path');
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-// Serve static files from the 'public' directory
-app.use(express.static('public'));
+// Serve static files from the 'build' directory (React build folder)
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Store the image URL temporarily in memory for the round
 let currentRoundImage = '';
@@ -12,13 +13,10 @@ let currentRoundImage = '';
 // Fetch image URL for the round from Picsum API
 app.get('/api/getImage', async (req, res) => {
   try {
-    // If no image exists for the round, fetch one
     if (!currentRoundImage) {
-      // Fetch image from Picsum
-      const response = await fetch('https://picsum.photos/200');  // Picsum API URL
+      const response = await fetch('https://picsum.photos/200');
       currentRoundImage = response.url;  // Store the image URL for the round
     }
-
     res.json({ imageUrl: currentRoundImage });
   } catch (error) {
     console.error('Error fetching image:', error);
@@ -30,10 +28,6 @@ app.get('/api/getImage', async (req, res) => {
 app.get('/api/resetImage', (req, res) => {
   currentRoundImage = '';  // Reset the image for the next round
   res.status(204).end();
-});
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
 });
 
 let userScore = {}; // Store the user's score by username
@@ -50,16 +44,26 @@ app.post('/api/updateScore', (req, res) => {
   res.status(200).send({ message: 'Score updated' });
 });
 
+// Endpoint to get the leaderboard
 app.get('/api/leaderboard', (req, res) => {
-    const leaderboardArray = Object.entries(userScore)
-      .map(([username, score]) => ({ username, score }))
-      .sort((a, b) => b.score - a.score); // Sort by score descending
-  
-    res.json(leaderboardArray);
-  });
+  const leaderboardArray = Object.entries(userScore)
+    .map(([username, score]) => ({ username, score }))
+    .sort((a, b) => b.score - a.score); // Sort by score descending
+  res.json(leaderboardArray);
+});
 
-  app.get('/api/score', (req, res) => {
-    const username = req.query.username;  // Fetch the username from query params
-    const score = userScore[username] || 0;  // Return the user's score (0 if not found)
-    res.json({ score });
-  });
+// Endpoint to get the score of a specific user
+app.get('/api/score', (req, res) => {
+  const username = req.query.username;  // Fetch the username from query params
+  const score = userScore[username] || 0;  // Return the user's score (0 if not found)
+  res.json({ score });
+});
+
+// Catch-all route for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html')); // Serve the React app
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
