@@ -98,3 +98,11 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
   - [x] **results** - After voting, users are routed to the Results page. This page shows a side-by-side comparison of the original drawing and the winning drawing. Placeholder logic provides structure, with plans for real-time vote count and result display using backend support.
 - [x] **Router** - navigation between components, allowing seamless transitions across game phases: login, lobby, home, about, leaderboard, drawing, voting, and results.
 - [x] **Hooks** - useState and useEffect for managing state across components. (loading scores from local storage on the Leaderboard or managing timers in Drawing and Vote)
+
+## Service deliverable
+- [x] **Node.js/Express HTTP service** 
+- [x] **Static middleware for frontend** 
+- [X] **Calls to third party endpoints** - using https://picsum.photos/ as my 3rd party images for the game
+- [x] **Backend service endpoints** - image fetching, and resetting. working on voting/user login
+- [x] **Frontend calls service endpoints** - using fetch function.
+
