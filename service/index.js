@@ -35,3 +35,31 @@ app.get('/api/resetImage', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+let userScore = {}; // Store the user's score by username
+
+// Endpoint to update the current user's score
+app.post('/api/updateScore', (req, res) => {
+  const { username, points } = req.body;
+  
+  if (!userScore[username]) {
+    userScore[username] = 0;  // Initialize score if it's the first time
+  }
+  
+  userScore[username] += points; // Add points to the current user's score
+  res.status(200).send({ message: 'Score updated' });
+});
+
+app.get('/api/leaderboard', (req, res) => {
+    const leaderboardArray = Object.entries(userScore)
+      .map(([username, score]) => ({ username, score }))
+      .sort((a, b) => b.score - a.score); // Sort by score descending
+  
+    res.json(leaderboardArray);
+  });
+
+  app.get('/api/score', (req, res) => {
+    const username = req.query.username;  // Fetch the username from query params
+    const score = userScore[username] || 0;  // Return the user's score (0 if not found)
+    res.json({ score });
+  });
