@@ -20,7 +20,7 @@ app.get('/api/getImage', async (req, res) => {
   try {
     if (!currentRoundImage) {
       const response = await fetch('https://picsum.photos/200');
-      currentRoundImage = response.url;  // Store the image URL for the round
+      currentRoundImage = response.url;  
     }
     res.json({ imageUrl: currentRoundImage });
   } catch (error) {
