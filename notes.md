@@ -1,1 +1,1 @@
-I had never known about or used github before. So, in this assignment I learned a lot! It's cool how github can talk to VS code and vice versa.
+Decided to take away the leaderboard page. If I have time I will add it back but right now i want to focus on the overall page without worrying about scores. I was trying to do too much (I've never built a website before)
