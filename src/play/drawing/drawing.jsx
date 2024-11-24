@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './drawing.css';
 
 export function Draw() {
-  const [imageUrl, setImageUrl] = useState('placeholder.jpg'); // Image to replicate
+  const [imageUrl, setImageUrl] = useState(''); // Image to replicate
   const [showImage, setShowImage] = useState(false); // Controls visibility of the image
   const [showMessage, setShowMessage] = useState(true); // Controls the "Get ready" message
   const [timer, setTimer] = useState(10); // Countdown timer for image display

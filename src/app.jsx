@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, NavLink, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { Login } from './login/login.jsx';
 import { Play } from './play/game.jsx';
 import { About } from './about/about.jsx';
@@ -8,42 +8,68 @@ import { Lobby } from './play/lobby/lobby.jsx';
 import { Draw } from './play/drawing/drawing.jsx';
 import { Vote } from './play/voting/voting.jsx';
 import { Results } from './play/results/results.jsx';
-import { AuthState } from './AuthState';
+import { AuthState } from './login/AuthState.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const storedUserName = localStorage.getItem('userName');
+  return storedUserName ? children : <Navigate to="/" replace />;
+};
 
 export default function App() {
   const [authState, setAuthState] = useState(AuthState.Unknown);
   const [userName, setUserName] = useState('');
 
-  // Check local storage on initial load to determine if the user is logged in
+  // Check for existing authentication on load
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
     if (storedUserName) {
       setUserName(storedUserName);
-      setAuthState(AuthState.Authenticated); // Ensure the state is set to Authenticated if there's a stored user
+      setAuthState(AuthState.Authenticated);
     } else {
       setAuthState(AuthState.Unauthenticated);
     }
   }, []);
 
-  const handleAuthChange = (newUserName, newAuthState) => {
+  const handleAuthChange = async (newUserName, newAuthState) => {
     setAuthState(newAuthState);
     setUserName(newUserName);
-    if (newAuthState === AuthState.Authenticated) {
-      localStorage.setItem('userName', newUserName); // Store the username in local storage
-    } else {
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Call logout endpoint
+      const response = await fetch('/api/auth/logout', {
+        method: 'DELETE',
+        credentials: 'same-origin',
+      });
+      
+      if (response.ok) {
+        localStorage.removeItem('userName');
+        setUserName('');
+        setAuthState(AuthState.Unauthenticated);
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Still clear local state even if server call fails
       localStorage.removeItem('userName');
+      setUserName('');
+      setAuthState(AuthState.Unauthenticated);
     }
   };
 
-  const handleLogout = () => {
-    handleAuthChange('', AuthState.Unauthenticated); // Update state to unauthenticated
-  };
-
-  const PrivateRoute = ({ children }) => {
-    return authState === AuthState.Authenticated ? children : <Navigate to="/" />;
-  };
+  // Show loading state while checking authentication
+  if (authState === AuthState.Unknown) {
+    return (
+      <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -55,16 +81,20 @@ export default function App() {
                 <h1 className="h3">In A Blink</h1>
               </NavLink>
               {authState === AuthState.Authenticated && (
-                <NavLink
-                  className="btn btn-secondary ms-3"
-                  to="/" // Redirect to login on logout
-                  onClick={handleLogout} // Handle logout
-                >
-                  Logout
-                </NavLink>
+                <div className="d-flex align-items-center">
+                  <span className="text-dark mx-3">
+                    <strong>{userName}</strong>
+                  </span>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
               )}
             </div>
-            <nav>
+            <nav className="d-flex align-items-center">
               <ul className="nav">
                 {authState === AuthState.Authenticated ? (
                   <>
@@ -89,14 +119,67 @@ export default function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<Login userName={userName} authState={authState} onAuthChange={handleAuthChange} />} />
+          <Route 
+            path="/" 
+            element={
+              authState === AuthState.Authenticated ? 
+                <Navigate to="/home" replace /> : 
+                <Login 
+                  userName={userName} 
+                  authState={authState} 
+                  onAuthChange={handleAuthChange} 
+                />
+            } 
+          />
           <Route path="/about" element={<About />} />
-          <Route path="/home" element={<Home />} /> 
-          <Route path="/play" element={<Play />} />  
-          <Route path="/vote" element={<Vote />} />
-          <Route path="/draw" element={<Draw />} />
-          <Route path="/lobby" element={<Lobby />} />
-          <Route path="/results" element={<Results />} />
+          <Route 
+            path="/home" 
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/play" 
+            element={
+              <ProtectedRoute>
+                <Play />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/vote" 
+            element={
+              <ProtectedRoute>
+                <Vote />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/draw" 
+            element={
+              <ProtectedRoute>
+                <Draw />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/lobby" 
+            element={
+              <ProtectedRoute>
+                <Lobby />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/results" 
+            element={
+              <ProtectedRoute>
+                <Results />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
