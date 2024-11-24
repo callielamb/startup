@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes, Navigate } from 'react-router-dom';
 import { Login } from './login/login.jsx';
 import { Play } from './play/game.jsx';
-import { Leaderboard } from './leaderboard/leaderboard.jsx';
 import { About } from './about/about.jsx';
 import { Home } from './home/home.jsx';
 import { Lobby } from './play/lobby/lobby.jsx';
@@ -75,9 +74,6 @@ export default function App() {
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/play">Play</NavLink>
                     </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/leaderboard">Leaderboard</NavLink>
-                    </li>
                   </>
                 ) : (
                   <li className="nav-item">
@@ -97,7 +93,6 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/home" element={<Home />} /> 
           <Route path="/play" element={<Play />} />  
-          <Route path="/leaderboard" element={<Leaderboard />} /> 
           <Route path="/vote" element={<Vote />} />
           <Route path="/draw" element={<Draw />} />
           <Route path="/lobby" element={<Lobby />} />

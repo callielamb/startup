@@ -3,7 +3,6 @@ const fetch = require('node-fetch'); // To fetch the image from picsum
 const path = require('path');  // Import the 'path' module for serving static files
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public'))); // Ensure static files are served from 'public'
 
@@ -33,27 +32,6 @@ app.get('/api/getImage', async (req, res) => {
 app.get('/api/resetImage', (req, res) => {
   currentRoundImage = '';  // Reset the image for the next round
   res.status(204).end();
-});
-
-// Handle user score updates
-let userScore = {}; 
-
-app.post('/api/updateScore', (req, res) => {
-  const { username, points } = req.body;
-  
-  if (!userScore[username]) {
-    userScore[username] = 0;
-  }
-  userScore[username] += points;
-  res.status(200).send({ message: 'Score updated' });
-});
-
-// Get leaderboard
-app.get('/api/leaderboard', (req, res) => {
-  const leaderboardArray = Object.entries(userScore)
-    .map(([username, score]) => ({ username, score }))
-    .sort((a, b) => b.score - a.score);
-  res.json(leaderboardArray);
 });
 
 // Serve the React app's index.html for any other route (handled by React Router)
