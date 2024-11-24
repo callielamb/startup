@@ -107,3 +107,11 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
 - [x] **Backend service endpoints** - image fetching, and resetting. working on voting/user login
 - [x] **Frontend calls service endpoints** - using fetch function.
 
+## DB/Login deliverable
+(I took away the leaderboard for now. I want to focus on functionality of the other key components)
+- [x] **MongoDB Atlas database created** - done!
+- [x] **Stores data in MongoDB** - done!
+- [x] **User registration** - Creates a new account in the database.
+- [x] **Use MongoDB to store credentials** - stores usernames and passwords. (if i bring leaderboard back it will store votes/scores)
+- [x] **Restricts functionality** - You can't access most pages if you aren't signed in. 
+- [x] **random update** - I edited the play page to respond to server inputs (name, password, number of players) which changes the lobby and voting page!
