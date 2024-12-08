@@ -13,3 +13,9 @@ node_modules
 npm-debug.log*
 .vscode
 dbConfig.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+tests
