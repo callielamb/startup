@@ -4,9 +4,19 @@ const express = require('express');
 const fetch = require('node-fetch'); // To fetch the image from picsum
 const path = require('path');  // Import the 'path' module for serving static files
 const app = express();
+const WebSocket = require('ws');
+const http = require('http');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
 const DB = require('./database.js');
+
+//create an HTTP server that will support websockets
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+// Store active game servers
+const gameServers = new Map();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -102,12 +112,12 @@ secureApiRouter.use(async (req, res, next) => {
 // Default error handler
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
-  });
+});
   
   // Return the application's default page if the path is unknown
-  app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'public' });
-  });
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
   
   // setAuthCookie in the HTTP response
   function setAuthCookie(res, authToken) {
@@ -121,3 +131,5 @@ app.use(function (err, req, res, next) {
 const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
