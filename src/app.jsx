@@ -12,6 +12,7 @@ import { AuthState } from './login/AuthState.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const storedUserName = localStorage.getItem('userName');
@@ -173,6 +174,14 @@ export default function App() {
             } 
           />
           <Route 
+            path="/lobby/:serverId" 
+            element={
+              <ProtectedRoute>
+                <Lobby />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
             path="/results" 
             element={
               <ProtectedRoute>
@@ -195,5 +204,5 @@ export default function App() {
 }
 
 function NotFound() {
-  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
+  return <main className='container-fluid bg-secondary text-center'>: Return to sender. Address unknown.</main>;
 }

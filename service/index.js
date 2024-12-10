@@ -1,135 +1,182 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const express = require('express');
-const fetch = require('node-fetch'); // To fetch the image from picsum
-const path = require('path');  // Import the 'path' module for serving static files
-const app = express();
-const WebSocket = require('ws');
+const fetch = require('node-fetch');
+const path = require('path');
 const http = require('http');
-const { peerProxy } = require('./peerProxy.js');
+const { peerProxy } = require('./peerProxy');
+const GameServer = require('./gameServer');
+
+const app = express();
+const server = http.createServer(app);
+
+// Use peerProxy for WebSocket management
+peerProxy(server);
 
 const authCookieName = 'token';
 const DB = require('./database.js');
 
-//create an HTTP server that will support websockets
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
-
-// Store active game servers
-const gameServers = new Map();
-
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public'))); // Ensure static files are served from 'public'
-
+// Middleware setup
 app.use(express.json());
-
-//added
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.set('trust proxy', true);
 
-var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+// API to create a new game server
+app.post('/api/createServer', async (req, res) => {
+  try {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
 
-// Store the image URL temporarily in memory for the round
-let currentRoundImage = '';
+    const { serverName } = req.body;
+    const server = GameServer.createServer(user._id, user.username, serverName);
+    res.status(201).json(server);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-// Fetch image URL for the round from Picsum API
+// API to join a game server
+app.post('/api/joinServer', async (req, res) => {
+  try {
+    const { serverId } = req.body;
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const server = GameServer.joinServer(serverId, user._id, user.username);
+    res.status(200).json(server);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// API to start a game
+app.post('/api/startGame', async (req, res) => {
+  try {
+    const { serverId } = req.body;
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const server = GameServer.startGame(serverId, user._id);
+    res.status(200).json(server);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// API to submit a drawing
+app.post('/api/submitDrawing', async (req, res) => {
+  try {
+    const { serverId, imageData } = req.body;
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const server = GameServer.submitDrawing(serverId, user._id, user.username, imageData);
+    res.status(200).json(server);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// API to submit a vote
+app.post('/api/submitVote', async (req, res) => {
+  try {
+    const { serverId, votedDrawingUserId } = req.body;
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const result = GameServer.submitVote(serverId, user._id, votedDrawingUserId);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// API to fetch active servers
+app.get('/api/getServers', (req, res) => {
+  const servers = GameServer.listAvailableServers();
+  res.json(servers);
+});
+
+// Fetch random image for drawing prompt
 app.get('/api/getImage', async (req, res) => {
   try {
-    if (!currentRoundImage) {
-      const response = await fetch('https://picsum.photos/200');
-      currentRoundImage = response.url;  
-    }
-    res.json({ imageUrl: currentRoundImage });
+    const response = await fetch('https://picsum.photos/200');
+    const imageUrl = response.url;
+    res.json({ imageUrl });
   } catch (error) {
     console.error('Error fetching image:', error);
     res.status(500).send('Error fetching image');
   }
 });
 
-// Reset the round image when the user returns to the lobby
-app.get('/api/resetImage', (req, res) => {
-  currentRoundImage = '';  // Reset the image for the next round
-  res.status(204).end();
+// Authentication APIs (kept the same as before)
+app.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.username)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.username, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({ id: user._id });
+  }
 });
 
-// Serve the React app's index.html for any other route (handled by React Router)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));  // Serve index.html for any unmatched route
-});
-
-//all the login code
-// CreateAuth token for a new user
-apiRouter.post('/auth/create', async (req, res) => {
-    if (await DB.getUser(req.body.username)) {
-      res.status(409).send({ msg: 'Existing user' });
-    } else {
-      const user = await DB.createUser(req.body.username, req.body.password);
-  
-      // Set the cookie
-      setAuthCookie(res, user.token);
-  
-      res.send({
-        id: user._id,
-      });
-    }
-});
-// GetAuth token for the provided credentials
-apiRouter.post('/auth/login', async (req, res) => {
-    const user = await DB.getUser(req.body.username);
-    if (user) {
-      if (await bcrypt.compare(req.body.password, user.password)) {
-        setAuthCookie(res, user.token);
-        res.send({ id: user._id });
-        return;
-      }
-    }
-    res.status(401).send({ msg: 'Unauthorized' });
-});
-  
-// DeleteAuth token if stored in cookie
-apiRouter.delete('/auth/logout', (_req, res) => {
-    res.clearCookie(authCookieName);
-    res.status(204).end();
-});
-
-// secureApiRouter verifies credentials for endpoints
-const secureApiRouter = express.Router();
-apiRouter.use(secureApiRouter);
-
-secureApiRouter.use(async (req, res, next) => {
-  const authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
+app.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.username);
+  if (user && (await bcrypt.compare(req.body.password, user.password))) {
+    setAuthCookie(res, user.token);
+    res.send({ id: user._id });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
-// Default error handler
-app.use(function (err, req, res, next) {
-    res.status(500).send({ type: err.name, message: err.message });
-});
-  
-  // Return the application's default page if the path is unknown
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
-});
-  
-  // setAuthCookie in the HTTP response
-  function setAuthCookie(res, authToken) {
-    res.cookie(authCookieName, authToken, {
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-  }
-
-const httpService = app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+app.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
+  res.status(204).end();
 });
 
-peerProxy(httpService);
+// Error handler
+app.use((err, req, res, next) => {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+
+// Serve React app for unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Utility to set auth cookies
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+// Start the server
+const port = process.env.PORT || 4000;
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
