@@ -22,6 +22,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.set('trust proxy', true);
 
+// Authentication APIs (kept the same as before)
+app.post('/api/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.username)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.username, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({ id: user._id });
+  }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.username);
+  if (user && (await bcrypt.compare(req.body.password, user.password))) {
+    setAuthCookie(res, user.token);
+    res.send({ id: user._id });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
 // API to create a new game server
 app.post('/api/createServer', async (req, res) => {
   try {
@@ -130,28 +151,7 @@ app.get('/api/getImage', async (req, res) => {
   }
 });
 
-// Authentication APIs (kept the same as before)
-app.post('/auth/create', async (req, res) => {
-  if (await DB.getUser(req.body.username)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    const user = await DB.createUser(req.body.username, req.body.password);
-    setAuthCookie(res, user.token);
-    res.send({ id: user._id });
-  }
-});
-
-app.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.username);
-  if (user && (await bcrypt.compare(req.body.password, user.password))) {
-    setAuthCookie(res, user.token);
-    res.send({ id: user._id });
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
-});
-
-app.delete('/auth/logout', (_req, res) => {
+app.delete('/api/auth/logout', (_req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
