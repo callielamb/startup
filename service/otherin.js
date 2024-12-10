@@ -137,7 +137,7 @@ wss.on('connection', (ws) =>{
 
 
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public'))); // Ensure static files are served from 'public'

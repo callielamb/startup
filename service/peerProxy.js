@@ -123,9 +123,11 @@ function peerProxy(httpServer) {
 
   // Handle leaving a server
   function handleLeaveServer(ws, { serverId, userId, username }) {
+    console.log(`User ${username} (${userId}) leaving server ${serverId}`);
     const serverInstance = GameServer.leaveServer(serverId, userId);
     
     if (serverInstance) {
+      console.log(`Server ${serverId} still active. Players remaining: ${serverInstance.players.length}`);
       // Server still exists, update clients
       broadcastToAll({
         type: 'SERVER_UPDATED',
@@ -139,6 +141,7 @@ function peerProxy(httpServer) {
         }
       });
     } else {
+      console.log(`Server ${serverId} has been dissolved`)
       // Server was dissolved
       broadcastToAll({
         type: 'SERVER_REMOVED',

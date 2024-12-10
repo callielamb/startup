@@ -151,6 +151,45 @@ app.get('/api/getImage', async (req, res) => {
   }
 });
 
+app.get('/api/resetImage', async (req, res) => {
+  try {
+    const response = await fetch('https://picsum.photos/200');
+    const imageUrl = response.url;
+    res.json({ imageUrl });
+  } catch (error) {
+    console.error('Error resetting image:', error);
+    res.status(500).send('Error resetting image');
+  }
+});
+
+// API to get server details
+app.get('/api/serverDetails/:serverId', async (req, res) => {
+  const { serverId } = req.params;
+  console.log(`BACKEND: Fetching details for server ID: ${serverId}`);
+  
+  try {
+    const server = GameServer.getServerDetails(serverId);
+    console.log('BACKEND: Server details found:', server);
+    res.json({
+      id: server.id,
+      name: server.name,
+      hostUsername: server.hostUsername,
+      hostId: server.hostId,
+      status: server.status,
+      players: server.players,
+      maxPlayers: server.maxPlayers,
+    });
+  } catch (error) {
+    console.error('BACKEND: Detailed error fetching server details:', error);
+    res.status(404).json({ 
+      error: error.message,
+      details: 'Server not found or invalid server ID' 
+    });
+  }
+});
+
+
+
 app.delete('/api/auth/logout', (_req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -176,7 +215,7 @@ function setAuthCookie(res, authToken) {
 }
 
 // Start the server
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

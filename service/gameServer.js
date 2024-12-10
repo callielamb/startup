@@ -5,6 +5,38 @@ class GameServer {
     this.servers = new Map();
   }
 
+  getServerDetails(serverId) {
+    console.log('DEBUG: Attempting to get server details');
+    console.log(`DEBUG: Requested Server ID: ${serverId}`);
+    console.log('DEBUG: Current Server IDs:', Array.from(this.servers.keys()));
+
+    // Validate serverId format
+    if (!serverId || !serverId.startsWith('server-')) {
+      console.error('DEBUG: Invalid server ID format');
+      throw new Error('Invalid server ID format');
+    }
+
+    const server = this.servers.get(serverId);
+    
+    if (!server) {
+      console.error(`DEBUG: Server with ID ${serverId} not found`);
+      console.error('DEBUG: Servers currently in memory:', 
+        JSON.stringify(Array.from(this.servers.entries()), null, 2)
+      );
+      throw new Error(`Server with ID ${serverId} not found`);
+    }
+    
+    return {
+      id: server.id,
+      name: server.name,
+      hostUsername: server.hostUsername,
+      hostId: server.hostId,
+      status: server.status,
+      players: server.players,
+      maxPlayers: server.maxPlayers
+    };
+  }
+
   createServer(hostId, hostUsername, serverName) {
     const serverId = `server-${uuid.v4()}`;
     const server = {
@@ -21,13 +53,18 @@ class GameServer {
       minPlayersToStart: 3
     };
     this.servers.set(serverId, server);
+    
+    // Enhanced logging
+    console.log('Creating server:', server);
+    console.log('Current server map:', JSON.stringify(Array.from(this.servers.entries()), null, 2));
+    
     return server;
   }
 
   joinServer(serverId, userId, username) {
     const server = this.servers.get(serverId);
     if (!server) {
-      throw new Error('Server not found');
+      throw new Error('Server not found... in join server');
     }
 
     if (server.players.length >= server.maxPlayers) {
@@ -49,33 +86,41 @@ class GameServer {
   leaveServer(serverId, userId) {
     const server = this.servers.get(serverId);
     if (!server) {
+      console.error(`Attempt to leave non-existent server: ${serverId}`);
       return null;
     }
-
-    // Remove the player
-    server.players = server.players.filter(player => player.id !== userId);
-
-    // If the host leaves and there are no more players, remove the server
+  
+    server.players = server.players.filter((player) => player.id !== userId);
+  
+    // Check if host left and reassign
     if (server.hostId === userId) {
       if (server.players.length > 0) {
-        // Assign a new host
         const newHost = server.players[0];
         server.hostId = newHost.id;
         server.hostUsername = newHost.username;
+        console.log(`Host left. New host: ${newHost.username}`);
       } else {
-        // No players left, remove the server
-        this.servers.delete(serverId);
-        return null;
+        // Set a timeout for server deletion
+        server.deletionTimeout = setTimeout(() => {
+          console.log(`Deleting empty server: ${serverId} after timeout`);
+          this.servers.delete(serverId);
+        }, 5 * 60 * 1000); // 5 minutes timeout
       }
     }
-
+  
+    // Clear any existing deletion timeout if players join
+    if (server.deletionTimeout && server.players.length > 0) {
+      clearTimeout(server.deletionTimeout);
+      delete server.deletionTimeout;
+    }
+  
     return server;
   }
 
   startGame(serverId, hostId) {
     const server = this.servers.get(serverId);
     if (!server) {
-      throw new Error('Server not found');
+      throw new Error('Server not found... in start game');
     }
 
     if (server.hostId !== hostId) {

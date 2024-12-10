@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Play() {
-  // State for creating a new server
   const [serverName, setServerName] = useState('');
-
-  // State for available servers
   const [availableServers, setAvailableServers] = useState([]);
   const [socket, setSocket] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Establish WebSocket connection
-    const ws = new WebSocket('ws://localhost:4000/ws');
+  // Separate function to establish WebSocket connection
+  const setupWebSocket = useCallback(() => {
+    // Close existing socket if it exists
+    if (socket) {
+      socket.close();
+    }
+
+    const ws = new WebSocket('ws://localhost:3000/ws');
 
     ws.onopen = () => {
-      console.log('Connected to WebSocket');
-      // Request initial list of servers
+      console.log('WebSocket connection established');
+      
+      // Fetch initial servers after connection is open
       fetch('/api/getServers')
         .then((res) => res.json())
         .then((data) => {
@@ -29,11 +32,10 @@ export function Play() {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log('Received WebSocket message:', data);
-      
+
       switch (data.type) {
         case 'NEW_SERVER':
           setAvailableServers((prev) => {
-            // Check if server already exists to avoid duplicates
             const exists = prev.some(server => server.id === data.server.id);
             return exists 
               ? prev 
@@ -41,7 +43,6 @@ export function Play() {
           });
           break;
         case 'SERVER_UPDATED':
-          // Handle updates like new players joining or host changing
           setAvailableServers((prev) =>
             prev.map((server) => 
               server.id === data.server.id 
@@ -51,10 +52,13 @@ export function Play() {
           );
           break;
         case 'SERVER_REMOVED':
-          // Remove server from available servers
           setAvailableServers((prev) => 
             prev.filter((server) => server.id !== data.serverId)
           );
+          break;
+        case 'SERVER_REMOVED_CONFIRMATION':
+          alert('Server has been removed.');
+          window.location.href = '/';
           break;
         default:
           console.warn('Unhandled WebSocket message:', data);
@@ -63,14 +67,27 @@ export function Play() {
 
     ws.onerror = (error) => {
       console.error('WebSocket Error:', error);
+      // Attempt to reconnect after a short delay
+      setTimeout(setupWebSocket, 1000);
+    };
+
+    ws.onclose = (event) => {
+      console.log('WebSocket connection closed:', event);
+      // Attempt to reconnect
+      setTimeout(setupWebSocket, 1000);
     };
 
     setSocket(ws);
+    return ws;
+  }, []);
+
+  useEffect(() => {
+    const ws = setupWebSocket();
 
     return () => {
       if (ws) ws.close();
     };
-  }, []);
+  }, [setupWebSocket]);
 
   const createServer = (e) => {
     e.preventDefault();
@@ -80,17 +97,18 @@ export function Play() {
       return;
     }
 
-    fetch('/api/createServer', { 
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ serverName }) 
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Server created:', data);
-        
-        // Send WebSocket message to broadcast new server
-        if (socket) {
+    // Ensure socket is open before sending
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      fetch('/api/createServer', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serverName }) 
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('Server created:', data);
+          
+          // Send WebSocket message to broadcast new server
           socket.send(JSON.stringify({ 
             type: 'NEW_SERVER', 
             server: { 
@@ -102,16 +120,20 @@ export function Play() {
               status: 'LOBBY' 
             } 
           }));
-        }
-        
-        // Navigate to lobby
-        navigate(`/lobby/${data.id}`);
-      })
-      .catch((err) => {
-        console.error('Error creating server:', err);
-        alert('Failed to create server. Please try again.');
-      });
+          
+          // Navigate to lobby
+          navigate(`/lobby/${data.id}`);
+        })
+        .catch((err) => {
+          console.error('Error creating server:', err);
+          alert('Failed to create server. Please try again.');
+        });
+    } else {
+      console.error('WebSocket is not open');
+      alert('Connection lost. Please refresh and try again.');
+    }
   };
+
 
   const joinServer = (serverId) => {
     fetch('/api/joinServer', {

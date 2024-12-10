@@ -7,6 +7,7 @@ export function Lobby() {
   const [socket, setSocket] = useState(null);
   const [serverName, setServerName] = useState('');
   const [isHost, setIsHost] = useState(false);
+  const [hostUsername, setHostUsername] = useState('');
   const { serverId } = useParams();
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ export function Lobby() {
     sessionStorage.removeItem('gameImage');
     fetch('/api/resetImage');
 
-    const ws = new WebSocket('ws://localhost:4000/ws');
+    const ws = new WebSocket('ws://localhost:3000/ws');
     
     ws.onopen = () => {
       const userId = getUserId();
@@ -31,13 +32,24 @@ export function Lobby() {
 
       // Fetch server details to get server name and host info
       fetch(`/api/serverDetails/${serverId}`)
-        .then(response => response.json())
+        .then(response => {
+          console.log('FRONTEND: Response status:', response.status);
+          if (!response.ok) {
+            return response.json().then(errorData => {
+              throw new Error(errorData.error || 'Failed to fetch server details');
+            });
+          }
+          return response.json();
+        })
         .then(data => {
-          setServerName(data.serverName);
-          setIsHost(data.hostId === userId);
+          console.log('FRONTEND: Server details:', data)
+          setServerName(data.name);
+          setHostUsername(data.hostUsername);
+          setIsHost(data.hostUsername === getUsername());
         })
         .catch(error => {
-          console.error('Error fetching server details:', error);
+          console.error('FRONTEND: Detailed error fetching server details:', error);
+          alert(`Could not fetch server details: ${error.message}. Please try again.`);
         });
     };
 
@@ -125,6 +137,7 @@ export function Lobby() {
       <div className="player-grid mt-4">
         {[...Array(6)].map((_, index) => {
           const player = players[index];
+          const isPlayerHost = player && player.username === hostUsername;
           return (
             <div 
               key={index} 
@@ -133,7 +146,7 @@ export function Lobby() {
               {player ? (
                 <h5 className="text-center">
                   {player.username}
-                  {player.isHost && <span className="badge bg-primary ms-2">Host</span>}
+                  {isPlayerHost && <span className="badge bg-primary ms-2">Host</span>}
                 </h5>
               ) : (
                 <h5 className="text-center text-muted">Waiting for player...</h5>

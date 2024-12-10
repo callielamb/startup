@@ -5,7 +5,7 @@ export function Draw() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:4000/ws');
+    const ws = new WebSocket('ws://localhost:3000/ws');
     ws.onopen = () => {
       ws.send(JSON.stringify({
         type: 'JOIN_GAME',
