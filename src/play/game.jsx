@@ -14,7 +14,7 @@ export function Play() {
       socket.close();
     }
 
-    const ws = new WebSocket('ws://localhost:3000/ws');
+    const ws = new WebSocket('ws://localhost:5000/ws');
 
     ws.onopen = () => {
       console.log('WebSocket connection established');

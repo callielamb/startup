@@ -137,7 +137,7 @@ wss.on('connection', (ws) =>{
 
 
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 5000;
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public'))); // Ensure static files are served from 'public'
@@ -176,7 +176,7 @@ app.get('/api/resetImage', (req, res) => {
 
 // Serve the React app's index.html for any other route (handled by React Router)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));  // Serve index.html for any unmatched route
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));  // Serve index.html for any unmatched route
 });
 
 //all the login code

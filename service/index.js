@@ -10,19 +10,22 @@ const GameServer = require('./gameServer');
 const app = express();
 const server = http.createServer(app);
 
-// Use peerProxy for WebSocket management
-peerProxy(server);
+const port = process.argv.length > 2 ? process.argv[2] : 5000;
 
 const authCookieName = 'token';
+
 const DB = require('./database.js');
 
 // Middleware setup
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(cookieParser());
 app.set('trust proxy', true);
 
-// Authentication APIs (kept the same as before)
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
+
+// Authentication APIs 
 app.post('/api/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.username)) {
     res.status(409).send({ msg: 'Existing user' });
@@ -200,10 +203,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ type: err.name, message: err.message });
 });
 
-// Serve React app for unmatched routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+
 
 // Utility to set auth cookies
 function setAuthCookie(res, authToken) {
@@ -214,8 +214,14 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-// Start the server
-const port = process.env.PORT || 3000;
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
+
+// Serve React app for unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+peerProxy(httpService);
