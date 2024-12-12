@@ -16,8 +16,7 @@ export function Lobby() {
     sessionStorage.removeItem('gameImage');
     fetch('/api/resetImage');
 
-    const ws = new WebSocket('ws://localhost:5000/ws');
-    
+    const ws = new WebSocket(`${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`);    
     ws.onopen = () => {
       const userId = getUserId();
       const username = getUsername();

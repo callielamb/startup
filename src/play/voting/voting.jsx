@@ -9,8 +9,7 @@ export function Vote() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:5000/ws');
-    ws.onopen = () => {
+    const ws = new WebSocket(`${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`);    ws.onopen = () => {
       ws.send(JSON.stringify({
         type: 'GET_DRAWINGS',
         serverId: sessionStorage.getItem('serverId'),

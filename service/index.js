@@ -168,6 +168,7 @@ app.get('/api/resetImage', async (req, res) => {
 // API to get server details
 app.get('/api/serverDetails/:serverId', async (req, res) => {
   const { serverId } = req.params;
+  console.log('Received server ID: ', serverId);
   console.log(`BACKEND: Fetching details for server ID: ${serverId}`);
   
   try {
