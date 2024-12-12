@@ -121,4 +121,5 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
 - [x] **Backend listens for WebSocket connection** - done!
 - [x] **Frontend makes WebSocket connection** - done!
 - [x] **Data sent over WebSocket connection** - done!
-- [] **WebSocket data displayed** - It isn't working completely yet. I was having a lot of trouble just getting users to create a server. I will keep developing the website but it is not done. I still need to have users join a server, troubleshoot the game pages (drawing, voting, results)
+- [x] **WebSocket data displayed** - You can see how many people are in each server!
+- [] **All visible elements are working** - It isn't working completely yet. I was having a lot of trouble just getting users to create a server. I will keep developing the website but it is not done. start the game, troubleshoot the game pages (drawing, voting, results)

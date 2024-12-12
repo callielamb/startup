@@ -119,7 +119,7 @@ export function Lobby() {
           <button 
             onClick={startGame} 
             className="btn btn-primary mt-3"
-            disabled={players.length < 2}
+            disabled={players.length < 3}
           >
             Start Game
           </button>

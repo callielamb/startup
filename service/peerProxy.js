@@ -27,6 +27,30 @@ function peerProxy(httpServer) {
           case 'NEW_SERVER':
             handleNewServer(ws, parsedMessage.server);
             break;
+          case 'JOIN_LOBBY':
+              //add a user to a specific game server
+              const server = gameServers.get(data.serverId);
+              if (server){
+                //track connedcted players
+                if(!server.players) server.players = [];
+                server.players.push({
+                  id: data.userId,
+                  username: data.username,
+                  ready: false
+                });
+      
+                //updated player list to every player
+                wss.clients.forEach((client) => {
+                  if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({
+                      type: "LOBBY_PLAYERS_UPDATE",
+                      players: server.players,
+                      serverId: data.serverId
+                    }));
+                  }
+                });
+              }
+              break;
           case 'GET_DRAWINGS':
             handleGetDrawings(ws, parsedMessage.serverId);
             break;
