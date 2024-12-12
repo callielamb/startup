@@ -46,6 +46,7 @@ class GameServer {
       name: serverName || 'Unnamed Server',
       players: [{ id: hostId, username: hostUsername }],
       status: 'LOBBY',
+      uniquePlayerIds: new Set([hostId]),
       drawings: [],
       votes: {},
       createdAt: new Date(),
@@ -76,8 +77,9 @@ class GameServer {
     }
 
     // Prevent duplicate joins
-    if (!server.players.some(player => player.id === userId)) {
+    if (!server.uniquePlayerIds.has(userId)) {
       server.players.push({ id: userId, username });
+      server.uniquePlayerIds.add(userId);
     }
 
     return server;
@@ -92,6 +94,8 @@ class GameServer {
   
     server.players = server.players.filter((player) => player.id !== userId);
   
+    server.uniquePlayerIds.delete(userId);
+
     // Check if host left and reassign
     if (server.hostId === userId) {
       if (server.players.length > 0) {
