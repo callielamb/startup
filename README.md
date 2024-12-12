@@ -115,3 +115,10 @@ For this deliverable, I used JavaScript and React to provide a rough mockup of t
 - [x] **Use MongoDB to store credentials** - stores usernames and passwords. (if i bring leaderboard back it will store votes/scores)
 - [x] **Restricts functionality** - You can't access most pages if you aren't signed in. 
 - [x] **random update** - I edited the play page to respond to server inputs (name, password, number of players) which changes the lobby and voting page!
+
+## WebSocket deliverable
+
+- [x] **Backend listens for WebSocket connection** - done!
+- [x] **Frontend makes WebSocket connection** - done!
+- [x] **Data sent over WebSocket connection** - done!
+- [] **WebSocket data displayed** - It isn't working completely yet. I was having a lot of trouble just getting users to create a server. I will keep developing the website but it is not done. I still need to have users join a server, troubleshoot the game pages (drawing, voting, results)
