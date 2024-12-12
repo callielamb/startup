@@ -50,6 +50,18 @@ export function Play() {
             )
           );
           break;
+        case 'PLAYER_LEFT':
+            setAvailableServers((prev) => 
+              prev.map((server) => 
+                server.id === data.serverId 
+                  ? { 
+                      ...server, 
+                      players: server.players - 1 
+                    } 
+                  : server
+              )
+            );
+          break;
         case 'SERVER_REMOVED':
           setAvailableServers((prev) => 
             prev.filter((server) => server.id !== data.serverId)
@@ -141,18 +153,37 @@ export function Play() {
       body: JSON.stringify({ serverId }),
     })
       .then((res) => {
-        if (res.ok) {
-          navigate(`/lobby/${serverId}`);
-        } else {
-          console.error('Error joining server:', res);
-          alert('Failed to join server. Please try again.');
+        console.log('Full server join response:', res);
+        return res.json(); // Always parse the response
+      })
+      .then((data) => {
+        console.log('Parsed response data:', data);
+        if (data.error) {
+          throw new Error(data.error);
         }
+        navigate(`/lobby/${serverId}`);
       })
       .catch((err) => {
-        console.error('Error joining server:', err);
-        alert('Failed to join server. Please check your connection.');
+        console.error('Detailed error joining server:', err);
+        alert(`Failed to join server: ${err.message}`);
       });
   };
+
+const leaveServerAgain = (serverId) => {
+  fetch('/api/leaveServerAgain', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ serverId }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      navigate('/');
+    })
+    .catch((err) => {
+      console.error('Error leaving server:', err);
+      alert('Failed to leave server');
+    });
+};
 
   return (
     <main className="container-fluid">
@@ -163,30 +194,46 @@ export function Play() {
               <h3 className="card-title text-center">Join a Game</h3>
               <p>Select from the available games below:</p>
               <ul className="list-group">
-                {availableServers.length > 0 ? (
-                  availableServers.map((server) => (
-                    <li 
-                      key={server.id} 
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <strong>{server.name || 'Unnamed Server'}</strong>
-                        <div className="text-muted small">
-                          Host: {server.hostUsername}
-                        </div>
-                      </div>
-                      <span className="badge bg-primary rounded-pill">
-                        {server.players} / {server.maxPlayers}
-                      </span>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        onClick={() => joinServer(server.id)}
-                        disabled={server.players >= server.maxPlayers || server.status !== 'LOBBY'}
+              {availableServers.length > 0 ? (
+                  availableServers.map((server) => {
+                    // Debug logging for server conditions
+                    console.log(`Server ${server.id} details:`, {
+                      name: server.name,
+                      players: server.players,
+                      maxPlayers: server.maxPlayers,
+                      status: server.status,
+                      isDisabled: server.players >= server.maxPlayers || server.status !== 'LOBBY'
+                    });
+
+                    return (
+                      <li 
+                        key={server.id} 
+                        className="list-group-item d-flex justify-content-between align-items-center"
                       >
-                        Join
-                      </button>
-                    </li>
-                  ))
+                        <div>
+                          <strong>{server.name || 'Unnamed Server'}</strong>
+                          <div className="text-muted small">
+                            Host: {server.hostUsername}
+                          </div>
+                        </div>
+                        <span className="badge bg-primary rounded-pill">
+                          {server.players} / {server.maxPlayers}
+                        </span>
+                        <button
+                          className="btn btn-primary btn-sm"
+                          onClick={() => {
+                            console.log('Attempting to join server:', server);
+                            joinServer(server.id);
+                          }}
+                          disabled={server.players >= server.maxPlayers}
+                        >
+                          {server.players >= server.maxPlayers 
+                            ? 'Full' 
+                            : 'Join'}
+                        </button>
+                      </li>
+                    );
+                  })
                 ) : (
                   <li className="list-group-item">No servers available</li>
                 )}

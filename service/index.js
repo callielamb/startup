@@ -68,6 +68,34 @@ app.post('/api/createServer', async (req, res) => {
 app.post('/api/joinServer', async (req, res) => {
   try {
     const { serverId } = req.body;
+    console.log('Join server request:', { serverId });
+
+    const authToken = req.cookies[authCookieName];
+    console.log('Auth token:', authToken);
+
+    const user = await DB.getUserByToken(authToken);
+    
+    if (!user) {
+      console.error('Unauthorized join attempt');
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    console.log('User attempting to join:', user);
+
+    const server = GameServer.joinServer(serverId, user._id, user.username);
+    console.log('Server after join:', server);
+
+    res.status(200).json(server);
+  } catch (error) {
+    console.error('Full error in join server:', error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// player leaves the server
+app.post('/api/leaveServer', async (req, res) => {
+  try {
+    const { serverId } = req.body;
     const authToken = req.cookies[authCookieName];
     const user = await DB.getUserByToken(authToken);
     
@@ -75,7 +103,23 @@ app.post('/api/joinServer', async (req, res) => {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const server = GameServer.joinServer(serverId, user._id, user.username);
+    const server = GameServer.leaveServer(serverId, user._id);
+    
+    if (server) {
+      // Use broadcastToAll from peerProxy
+      peerProxy.broadcastToAll({
+        type: 'SERVER_UPDATED',
+        server: {
+          id: server.id,
+          name: server.name,
+          hostUsername: server.hostUsername,
+          players: server.players.length,
+          maxPlayers: server.maxPlayers,
+          status: server.status
+        }
+      });
+    }
+
     res.status(200).json(server);
   } catch (error) {
     res.status(400).json({ error: error.message });

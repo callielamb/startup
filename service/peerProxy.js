@@ -212,4 +212,14 @@ function peerProxy(httpServer) {
   return wss;
 }
 
-module.exports = { peerProxy };
+module.exports = { 
+  peerProxy,
+  broadcastToAll: (message) => {
+    // Implementation of broadcastToAll
+    connections.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify(message));
+      }
+    });
+  }
+};
